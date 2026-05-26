@@ -1,0 +1,2643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Japon 21j">
+<title>Japon 21 jours · 8–28 juin</title>
+<style>
+:root {
+  --bg:#fff7f8; --panel:#ffffff; --card:#fff1f4; --soft:#f8c7d0; --text:#2b0f14; --muted:#6b4b52;
+  --accent:#d90429; --accent2:#f8a8b8; --sakura:#ffd7df; --ok:#16a34a; --line:rgba(120,18,34,.14);
+  --shadow: 0 18px 45px rgba(160, 28, 48, .14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left, rgba(217,4,41,.12), transparent 34%),radial-gradient(circle at top right, rgba(255,183,197,.34), transparent 30%),linear-gradient(180deg,#fff7f8 0%, #ffffff 48%, #fff1f4 100%);color:var(--text);}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.app{max-width:1180px;margin:0 auto;padding:18px 14px 90px}
+.hero{position:sticky;top:0;z-index:20;margin:-18px -14px 12px;padding:18px 14px 12px;background:linear-gradient(180deg, rgba(255,247,248,.98), rgba(255,247,248,.90));backdrop-filter: blur(12px);border-bottom:1px solid var(--line)}
+.heroTop{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#d90429;font-weight:800}
+h1{font-size:28px;line-height:1.05;margin:5px 0 6px}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.45;max-width:780px}
+.pillrow{display:flex;gap:8px;overflow:auto;padding:11px 0 2px;scrollbar-width:none}
+.pillrow::-webkit-scrollbar{display:none}
+.pill{border:1px solid var(--line);background:rgba(255,255,255,.78);color:var(--text);border-radius:999px;padding:8px 11px;white-space:nowrap;font-size:13px;cursor:pointer}
+.pill.active{background:linear-gradient(135deg,var(--accent),#ff6f91);border-color:transparent;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0}
+.stat{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:10px}
+.stat b{display:block;font-size:18px}
+.stat span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.dayCard{display:none;background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-top:14px}
+.dayCard.active{display:block;animation:fade .2s ease-out}
+@keyframes fade{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}
+.dayHead{padding:18px;background:linear-gradient(135deg,rgba(217,4,41,.11),rgba(255,215,223,.75));border-bottom:1px solid var(--line)}
+.dayTitle{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.dayTitle h2{margin:0;font-size:24px}
+.city{color:#a70d24;font-weight:800;margin-top:4px}
+.summary{color:var(--muted);line-height:1.5;margin:12px 0 0}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;padding:14px}
+.section{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:20px;padding:14px}
+.section h3{margin:0 0 10px;font-size:17px;display:flex;align-items:center;gap:8px}
+.hotelBox{display:grid;gap:8px}
+.hotelName{font-weight:900;font-size:18px}
+.meta{color:var(--muted);font-size:13px;line-height:1.4}
+.list{display:grid;gap:10px}
+.item{display:grid;grid-template-columns:28px 1fr;gap:9px;padding:10px;border-radius:16px;background:rgba(255,247,248,.88);border:1px solid rgba(255,255,255,.07)}
+.check{width:24px;height:24px;border-radius:8px;border:1px solid var(--soft);display:grid;place-items:center;cursor:pointer;background:rgba(255,255,255,.04);color:transparent;user-select:none}
+.item.done{opacity:.58}
+.item.done .check{background:var(--ok);color:white;border-color:var(--ok)}
+.item.done .ititle{text-decoration:line-through}
+.ititle{font-weight:850;line-height:1.25}
+.idesc{color:var(--muted);font-size:13px;line-height:1.45;margin:5px 0 8px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;padding:4px 7px;color:#6b4b52}
+.map{display:inline-flex;align-items:center;gap:5px;background:rgba(217,4,41,.10);border:1px solid rgba(217,4,41,.25);color:#a70d24;border-radius:999px;padding:5px 8px;font-size:12px;font-weight:800;margin-top:8px}
+.transport{padding:0 14px 14px}
+.note{background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.28);border-radius:18px;padding:12px;color:#a70d24;line-height:1.45;font-size:14px}
+.footerNav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,247,248,.94);backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:flex;gap:8px;justify-content:center}
+.navBtn,.resetBtn{border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);border-radius:14px;padding:10px 12px;font-weight:800;cursor:pointer}
+.navBtn.primary{background:linear-gradient(135deg,var(--accent),#ff6f91);border-color:transparent}
+.overview{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.mini{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:18px;padding:12px}
+.mini b{display:block;margin-bottom:4px}
+.mini small{color:var(--muted);line-height:1.4}
+.searchbar{display:flex;gap:8px;margin-top:10px}
+.searchbar input{width:100%;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.07);color:var(--text);padding:11px 12px;outline:none}
+.searchbar input::placeholder{color:#94a3b8}
+.routeBox{display:grid;gap:8px}
+.routeLine{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:13px;line-height:1.45}
+.routeLine b{min-width:78px;color:var(--accent)}
+.routePrice{display:inline-flex;align-items:center;gap:6px;background:rgba(217,4,41,.10);border:1px solid rgba(217,4,41,.22);border-radius:999px;padding:6px 9px;font-weight:900;color:#a70d24}
+
+/* Fond sakura discret, inspiré des branches de cerisiers japonais */
+.sakura-bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  overflow:hidden;
+}
+.sakura-branch{
+  position:absolute;
+  height:auto;
+  opacity:.95;
+}
+.sakura-branch-top{
+  top:70px;
+  right:-110px;
+  width:min(760px, 78vw);
+}
+.sakura-branch-bottom{
+  left:-115px;
+  bottom:42px;
+  width:min(640px, 72vw);
+  opacity:.72;
+}
+.blossom{
+  transform-box:fill-box;
+  transform-origin:center;
+}
+@media(max-width:820px){
+  .sakura-branch-top{
+    top:138px;
+    right:-185px;
+    width:560px;
+    opacity:.88;
+  }
+  .sakura-branch-bottom{
+    left:-220px;
+    bottom:92px;
+    width:500px;
+    opacity:.55;
+  }
+}
+
+/* Budget manuel par jour */
+.budgetInputWrap{
+  display:grid;
+  gap:10px;
+}
+.budgetFields{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+}
+.budgetFields input{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.86);
+  color:var(--text);
+  padding:12px 13px;
+  font-size:16px;
+  outline:none;
+}
+.budgetFields button{
+  border:0;
+  border-radius:14px;
+  padding:12px 14px;
+  background:linear-gradient(135deg,var(--accent),#ff6f91);
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+}
+.budgetSaved{
+  background:rgba(217,4,41,.08);
+  border:1px solid rgba(217,4,41,.18);
+  border-radius:16px;
+  padding:10px 12px;
+  color:#6b1020;
+  font-weight:800;
+}
+.budgetSaved small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+@media(max-width:820px){
+  h1{font-size:23px}
+  .grid{grid-template-columns:1fr;padding:10px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .dayHead{padding:14px}
+  .section{padding:12px}
+  .heroTop{display:block}
+  .overview{grid-template-columns:1fr}
+}
+@media print{
+  .hero,.footerNav,.check,.resetBtn{display:none!important}
+  body{background:#fff;color:#000}
+  .dayCard{display:block;box-shadow:none;border:1px solid #ddd;break-inside:avoid}
+  .grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+
+<div class="sakura-bg" aria-hidden="true">
+  <svg class="sakura-branch sakura-branch-top" viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="petalA" cx="45%" cy="38%" r="65%">
+        <stop offset="0%" stop-color="#fff7fb"/>
+        <stop offset="58%" stop-color="#ffd4df"/>
+        <stop offset="100%" stop-color="#f5a3b8"/>
+      </radialGradient>
+      <linearGradient id="branchA" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#5f2b24"/>
+        <stop offset="100%" stop-color="#2f1714"/>
+      </linearGradient>
+    </defs>
+    <path d="M770 24 C650 50 580 84 486 122 C386 162 300 165 215 203 C142 236 84 282 15 332"
+          fill="none" stroke="url(#branchA)" stroke-width="16" stroke-linecap="round" opacity=".42"/>
+    <path d="M590 83 C604 122 632 140 672 151" fill="none" stroke="#4b211c" stroke-width="7" stroke-linecap="round" opacity=".36"/>
+    <path d="M430 143 C444 178 472 198 515 206" fill="none" stroke="#4b211c" stroke-width="7" stroke-linecap="round" opacity=".32"/>
+    <path d="M270 180 C286 214 318 236 361 246" fill="none" stroke="#4b211c" stroke-width="6" stroke-linecap="round" opacity=".30"/>
+
+    <g class="blossom" transform="translate(620 88) rotate(18) scale(1.12)">
+      <path d="M0-22 C-19-39 -37-18 -18-2 C-35 12 -20 36 0 16 C20 36 35 12 18-2 C37-18 19-39 0-22Z" fill="url(#petalA)" stroke="#e97c96" stroke-width="1.2"/>
+      <circle r="5" fill="#d90429" opacity=".72"/>
+      <g stroke="#f4b000" stroke-width="1.4" stroke-linecap="round"><path d="M0 0 L0 -10"/><path d="M0 0 L9 -4"/><path d="M0 0 L-9 -4"/></g>
+    </g>
+    <g class="blossom" transform="translate(505 124) rotate(-8) scale(.86)">
+      <path d="M0-22 C-19-39 -37-18 -18-2 C-35 12 -20 36 0 16 C20 36 35 12 18-2 C37-18 19-39 0-22Z" fill="url(#petalA)" stroke="#e97c96" stroke-width="1.2"/>
+      <circle r="5" fill="#d90429" opacity=".72"/>
+    </g>
+    <g class="blossom" transform="translate(375 164) rotate(25) scale(1)">
+      <path d="M0-22 C-19-39 -37-18 -18-2 C-35 12 -20 36 0 16 C20 36 35 12 18-2 C37-18 19-39 0-22Z" fill="url(#petalA)" stroke="#e97c96" stroke-width="1.2"/>
+      <circle r="5" fill="#d90429" opacity=".72"/>
+    </g>
+    <g class="blossom" transform="translate(240 209) rotate(-18) scale(.78)">
+      <path d="M0-22 C-19-39 -37-18 -18-2 C-35 12 -20 36 0 16 C20 36 35 12 18-2 C37-18 19-39 0-22Z" fill="url(#petalA)" stroke="#e97c96" stroke-width="1.2"/>
+      <circle r="5" fill="#d90429" opacity=".72"/>
+    </g>
+    <g class="blossom" transform="translate(675 149) rotate(8) scale(.72)">
+      <path d="M0-22 C-19-39 -37-18 -18-2 C-35 12 -20 36 0 16 C20 36 35 12 18-2 C37-18 19-39 0-22Z" fill="url(#petalA)" stroke="#e97c96" stroke-width="1.2"/>
+      <circle r="5" fill="#d90429" opacity=".72"/>
+    </g>
+  </svg>
+
+  <svg class="sakura-branch sakura-branch-bottom" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="petalB" cx="45%" cy="38%" r="65%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="55%" stop-color="#ffd8e3"/>
+        <stop offset="100%" stop-color="#f6a7ba"/>
+      </radialGradient>
+    </defs>
+    <path d="M-20 275 C92 232 160 204 248 168 C345 128 432 84 670 34"
+          fill="none" stroke="#3a1915" stroke-width="13" stroke-linecap="round" opacity=".20"/>
+    <path d="M212 184 C220 145 247 119 285 99" fill="none" stroke="#3a1915" stroke-width="6" stroke-linecap="round" opacity=".18"/>
+    <path d="M380 112 C395 82 428 61 466 53" fill="none" stroke="#3a1915" stroke-width="6" stroke-linecap="round" opacity=".18"/>
+    <g transform="translate(112 236) rotate(-8) scale(.72)">
+      <path d="M0-22 C-19-39 -37-18 -18-2 C-35 12 -20 36 0 16 C20 36 35 12 18-2 C37-18 19-39 0-22Z" fill="url(#petalB)" stroke="#e97c96" stroke-width="1.2"/>
+      <circle r="5" fill="#d90429" opacity=".58"/>
+    </g>
+    <g transform="translate(290 101) rotate(22) scale(.82)">
+      <path d="M0-22 C-19-39 -37-18 -18-2 C-35 12 -20 36 0 16 C20 36 35 12 18-2 C37-18 19-39 0-22Z" fill="url(#petalB)" stroke="#e97c96" stroke-width="1.2"/>
+      <circle r="5" fill="#d90429" opacity=".58"/>
+    </g>
+    <g transform="translate(470 55) rotate(-14) scale(.64)">
+      <path d="M0-22 C-19-39 -37-18 -18-2 C-35 12 -20 36 0 16 C20 36 35 12 18-2 C37-18 19-39 0-22Z" fill="url(#petalB)" stroke="#e97c96" stroke-width="1.2"/>
+      <circle r="5" fill="#d90429" opacity=".58"/>
+    </g>
+  </svg>
+</div>
+<div class="app" id="app"></div>
+<div class="footerNav">
+  <button class="navBtn" onclick="prevDay()">← Jour précédent</button>
+  <button class="navBtn primary" onclick="nextDay()">Jour suivant →</button>
+  <button class="resetBtn" onclick="resetProgress()">↻ Reset</button>
+</div>
+<script>
+const TRIP = [
+  {
+    "day": 1,
+    "date": "8 juin",
+    "city": "Belgique → Japon",
+    "hotel": {
+      "name": "Nuit en vol / arrivée le 9 juin",
+      "city": "Avion → Tokyo",
+      "price": "Vol déjà payé séparément",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tokyo%20Haneda%20Airport%20or%20Narita%20Airport"
+    },
+    "budget": "Variable · repas aéroport/avion",
+    "summary": "Jour de départ. Objectif : voyager léger mentalement, garder les documents accessibles et dormir autant que possible dans l’avion.",
+    "transport": "Vol international. Garder passeport, réservations hôtels, assurance, carte bancaire et eSIM/Suica prêts. Ordre conseillé sans allers-retours : Check-list départ Japon → Télécharger les cartes offline → Préparer la Suica / Pasmo.",
+    "activities": [
+      {
+        "title": "Check-list départ Japon",
+        "desc": "Étape 1. Passeport, billets, réservations, adaptateur, eSIM/Saily, carte bancaire, cash de secours, médicaments, chargeur et powerbank.",
+        "area": "Aéroport de départ",
+        "budget": "€",
+        "tag": "Préparation",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Check-list%20d%C3%A9part%20Japon%20A%C3%A9roport%20de%20d%C3%A9part"
+      },
+      {
+        "title": "Télécharger les cartes offline",
+        "desc": "Étape 2. Télécharger Tokyo, Kyoto, Osaka, Hiroshima, Kanazawa et Hakone dans Google Maps avant le vol.",
+        "area": "Google Maps",
+        "budget": "€0",
+        "tag": "Pratique",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=T%C3%A9l%C3%A9charger%20les%20cartes%20offline%20Google%20Maps"
+      },
+      {
+        "title": "Préparer la Suica / Pasmo",
+        "desc": "Étape 3. Sur iPhone, ajouter Suica dans Apple Wallet si possible. Sinon achat/recharge sur place.",
+        "area": "Tokyo",
+        "budget": "¥",
+        "tag": "Transport",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Pr%C3%A9parer%20la%20Suica%20/%20Pasmo%20Tokyo"
+      }
+    ],
+    "food": [
+      {
+        "title": "Repas léger avant vol",
+        "desc": "Matin / pause. Éviter un repas trop lourd avant le long courrier. Garder une bouteille vide à remplir après le contrôle.",
+        "area": "Aéroport",
+        "budget": "€",
+        "tag": "Pratique",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Repas%20l%C3%A9ger%20avant%20vol%20A%C3%A9roport"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Astuce locale d’arrivée",
+        "desc": "Le premier jour au Japon, ne surchargez pas le planning : lumière, bruit, transport et jet lag fatiguent vite.",
+        "area": "Tokyo",
+        "budget": "€0",
+        "tag": "Conseil",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Astuce%20locale%20d%E2%80%99arriv%C3%A9e%20Tokyo"
+      }
+    ]
+  },
+  {
+    "day": 2,
+    "date": "9 juin",
+    "city": "Tokyo · Arrivée + Kanda",
+    "hotel": {
+      "name": "Tosei Hotel Cocone Kanda",
+      "city": "Tokyo · Kanda",
+      "price": "251,91 € · 9–12 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tosei%20Hotel%20Cocone%20Kanda%20Tokyo"
+    },
+    "budget": "¥7 000–12 000  (≈38€–65€)/ personne hors achats",
+    "summary": "Arrivée avec le décalage horaire. Journée volontairement douce : installation, première balade tokyoïte, ramen ou izakaya près de l’hôtel.",
+    "transport": "Aéroport → Tokyo → Kanda. Utiliser Suica/Pasmo. Éviter de multiplier les changements avec les bagages. Ordre conseillé sans allers-retours : Tosei Hotel Cocone Kanda → Kanda Station & ruelles d’izakaya → Nihonbashi Bridge → Akihabara Electric Town.",
+    "activities": [
+      {
+        "title": "Tosei Hotel Cocone Kanda",
+        "desc": "Étape 1. Check-in, dépôt des bagages et repérage du quartier autour de la gare de Kanda.",
+        "area": "Tokyo Kanda",
+        "budget": "Déjà payé",
+        "tag": "Hôtel",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tosei%20Hotel%20Cocone%20Kanda%20Tokyo%20Kanda"
+      },
+      {
+        "title": "Kanda Station & ruelles d’izakaya",
+        "desc": "Étape 2. Petites rues de salarymen, enseignes lumineuses, ambiance locale sans être trop touristique.",
+        "area": "Tokyo Kanda",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Spot local",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kanda%20Station%20%26%20ruelles%20d%E2%80%99izakaya%20Tokyo%20Kanda"
+      },
+      {
+        "title": "Nihonbashi Bridge",
+        "desc": "Étape 3. Petit détour élégant : vieux pont historique, contraste entre Tokyo ancien et moderne.",
+        "area": "Nihonbashi Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nihonbashi%20Bridge%20Nihonbashi%20Tokyo"
+      },
+      {
+        "title": "Akihabara Electric Town",
+        "desc": "Étape 4. À 1 station de Kanda. À faire si vous avez encore de l’énergie, sinon reporter.",
+        "area": "Akihabara Tokyo",
+        "budget": "¥0–¥5 000 (≈0,0€–27€)",
+        "tag": "Option",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Akihabara%20Electric%20Town%20Akihabara%20Tokyo"
+      }
+    ],
+    "food": [
+      {
+        "title": "Kikanbo Kanda",
+        "desc": "Matin / pause. Ramen miso épicé très connu à Kanda. Idéal pour un premier repas puissant à Tokyo.",
+        "area": "Kanda Tokyo",
+        "budget": "¥1 200–2 000 (≈6,5€–11€)",
+        "tag": "Ramen",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kikanbo%20Kanda%20Kanda%20Tokyo"
+      },
+      {
+        "title": "Kanda Matsuya",
+        "desc": "Déjeuner. Soba traditionnel dans une institution ancienne de Tokyo, très bon pour manger simple et japonais.",
+        "area": "Kanda Tokyo",
+        "budget": "¥1 500–3 000 (≈8,1€–16€)",
+        "tag": "Soba",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kanda%20Matsuya%20Kanda%20Tokyo"
+      },
+      {
+        "title": "Onigiri / konbini Lawson ou 7-Eleven",
+        "desc": "Soir / option. Pour le soir si vous êtes cassés par le vol : onigiri, sandwich tamago, café glacé, dessert japonais.",
+        "area": "Kanda Tokyo",
+        "budget": "¥500–1 200 (≈2,7€–6,5€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Onigiri%20/%20konbini%20Lawson%20ou%207-Eleven%20Kanda%20Tokyo"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Photo de nuit à Kanda",
+        "desc": "Les petites rues sous les voies ferrées donnent des photos très japonaises, surtout après la pluie.",
+        "area": "Kanda Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Photo%20de%20nuit%20%C3%A0%20Kanda%20Kanda%20Tokyo"
+      }
+    ],
+    "route": {
+      "title": "Arrivée aéroport → Tosei Hotel Cocone Kanda",
+      "best": "Si arrivée à Narita : Keisei Skyliner jusqu’à Ueno puis JR vers Kanda, ou Narita Express vers Tokyo puis JR. Si arrivée à Haneda : Keikyu/Monorail + JR, souvent le plus simple.",
+      "time": "Haneda : ±40–55 min · Narita : ±60–80 min",
+      "price": "Haneda : ±¥700–1 000  (≈3,8€–5,4€)/ pers. · Narita : ±¥1 400–3 100  (≈7,6€–17€)/ pers. selon option",
+      "tip": "À l’arrivée avec le décalage horaire, choisir le trajet avec le moins de changements.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tosei%20Hotel%20Cocone%20Kanda%20from%20Narita%20Airport%20Haneda%20Airport"
+    }
+  },
+  {
+    "day": 3,
+    "date": "10 juin",
+    "city": "Tokyo · Asakusa, Ueno, Akihabara",
+    "hotel": {
+      "name": "Tosei Hotel Cocone Kanda",
+      "city": "Tokyo · Kanda",
+      "price": "251,91 € · 9–12 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tosei%20Hotel%20Cocone%20Kanda%20Tokyo"
+    },
+    "budget": "¥8 000–15 000  (≈43€–81€)/ personne",
+    "summary": "Journée Tokyo avec Asakusa et Ueno, puis activité réservée à TeamLab Planets Tokyo à 17h30. Akihabara devient une option du soir si vous avez encore de l’énergie.",
+    "transport": "Kanda → Asakusa/Ueno le matin. Vers 16h15–16h30, partir vers Toyosu pour TeamLab Planets à 17h30. Après l’activité, retour possible vers Akihabara/Kanda ou dîner simple autour de Toyosu/Ginza.",
+    "activities": [
+      {
+        "title": "Sensō-ji",
+        "desc": "Étape 1. Le grand temple d’Asakusa. Arriver tôt pour profiter de la porte Kaminarimon sans trop de monde.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Incontournable",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Sens%C5%8D-ji%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Nakamise-dori",
+        "desc": "Étape 2. Rue de souvenirs : éventails, porte-bonheur, snacks sucrés, petites boîtes japonaises.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥1 000–5 000 (≈5,4€–27€)",
+        "tag": "Souvenirs",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nakamise-dori%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Kappabashi Dougu Street",
+        "desc": "Étape 3. Rue des ustensiles de cuisine : couteaux japonais, bols, baguettes, fausses nourritures en vitrine.",
+        "area": "Kappabashi Tokyo",
+        "budget": "¥0–¥15 000 (≈0,0€–81€)",
+        "tag": "Shopping typique",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kappabashi%20Dougu%20Street%20Kappabashi%20Tokyo"
+      },
+      {
+        "title": "Ueno Park",
+        "desc": "Étape 4. Pause verte, temples, étangs et musées. Bon endroit pour respirer entre deux quartiers.",
+        "area": "Ueno Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Balade",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ueno%20Park%20Ueno%20Tokyo"
+      },
+      {
+        "title": "Ameya-Yokochō",
+        "desc": "Étape 5. Marché populaire sous les rails : snacks, produits de la mer, petites échoppes.",
+        "area": "Ueno Tokyo",
+        "budget": "¥1 000–4 000 (≈5,4€–22€)",
+        "tag": "Marché",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ameya-Yokoch%C5%8D%20Ueno%20Tokyo"
+      },
+      {
+        "title": "TeamLab Planets Tokyo · 17h30",
+        "desc": "Activité déjà réservée à 17h30. Prévoir d’arriver 15 à 20 minutes avant. Ajuster la journée pour quitter Ueno/Akihabara assez tôt et rejoindre Toyosu sans stress.",
+        "area": "Toyosu Tokyo",
+        "budget": "Réservé · prix à encoder si souhaité",
+        "tag": "Réservation 17h30",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=TeamLab%20Planets%20Tokyo%20Toyosu"
+      },
+      {
+        "title": "Akihabara de nuit",
+        "desc": "Étape 6. Néons, arcades, boutiques rétro, figurines, électronique. Plus sympa en fin d’après-midi/soir.",
+        "area": "Akihabara Tokyo",
+        "budget": "¥0–¥10 000 (≈0,0€–54€)",
+        "tag": "Néons",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Akihabara%20de%20nuit%20Akihabara%20Tokyo"
+      }
+    ],
+    "food": [
+      {
+        "title": "Asakusa Kagetsudō",
+        "desc": "Matin / pause. Melonpan géant chaud, très photogénique et facile à manger sur le pouce.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥300–700 (≈1,6€–3,8€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Asakusa%20Kagetsud%C5%8D%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Sometarō Okonomiyaki",
+        "desc": "Déjeuner. Okonomiyaki ancien style à Asakusa, bonne expérience conviviale.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥2 000–4 000 (≈11€–22€)",
+        "tag": "Déjeuner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Sometar%C5%8D%20Okonomiyaki%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Gyukatsu Ichi Ni San",
+        "desc": "Soir / option. Bœuf pané à cuire soi-même sur pierre chaude, proche d’Akihabara.",
+        "area": "Akihabara Tokyo",
+        "budget": "¥2 000–3 500 (≈11€–19€)",
+        "tag": "Dîner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Gyukatsu%20Ichi%20Ni%20San%20Akihabara%20Tokyo"
+      },
+      {
+        "title": "Urban Dock LaLaport Toyosu",
+        "desc": "Option facile après TeamLab : plusieurs restaurants, food court et vue sur la baie. Pratique si vous ne voulez pas retraverser Tokyo tout de suite.",
+        "area": "Toyosu Tokyo",
+        "budget": "¥1 500–4 000 / ±8–22 €",
+        "tag": "Après TeamLab",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Urban%20Dock%20LaLaport%20Toyosu%20restaurants"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Hoppy Street",
+        "desc": "Petite rue d’izakaya à Asakusa. Très japonais, parfait pour photos et brochettes simples.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥1 500–4 000 (≈8,1€–22€)",
+        "tag": "Secret food",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hoppy%20Street%20Asakusa%20Tokyo"
+      }
+    ]
+  },
+  {
+    "day": 4,
+    "date": "11 juin",
+    "city": "Tokyo · Yanesen + Kagurazaka",
+    "hotel": {
+      "name": "Tosei Hotel Cocone Kanda",
+      "city": "Tokyo · Kanda",
+      "price": "251,91 € · 9–12 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tosei%20Hotel%20Cocone%20Kanda%20Tokyo"
+    },
+    "budget": "¥8 000–16 000  (≈43€–86€)/ personne",
+    "summary": "Tokyo plus intime : vieux quartiers, sanctuaires, cafés rétro, ruelles et artisanat. Une journée moins cliché et très photogénique.",
+    "transport": "Kanda → Nippori/Nezu puis métro vers Kagurazaka. Beaucoup à pied, chaussures confortables. Ordre conseillé sans allers-retours : Yanaka Ginza → Yuyake Dandan → Nezu Shrine → Hebimichi Snake Road → Kagurazaka.",
+    "activities": [
+      {
+        "title": "Yanaka Ginza",
+        "desc": "Étape 1. Petite rue commerçante rétro avec chats, croquettes, souvenirs et ambiance vieux Tokyo.",
+        "area": "Yanaka Tokyo",
+        "budget": "¥1 000–5 000 (≈5,4€–27€)",
+        "tag": "Local",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Yanaka%20Ginza%20Yanaka%20Tokyo"
+      },
+      {
+        "title": "Yuyake Dandan",
+        "desc": "Étape 2. Escalier connu pour la lumière de fin de journée, joli spot photo très simple.",
+        "area": "Yanaka Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Yuyake%20Dandan%20Yanaka%20Tokyo"
+      },
+      {
+        "title": "Nezu Shrine",
+        "desc": "Étape 3. Sanctuaire calme avec mini tunnel de torii rouges, alternative douce à Kyoto.",
+        "area": "Nezu Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Temple caché",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nezu%20Shrine%20Nezu%20Tokyo"
+      },
+      {
+        "title": "Hebimichi Snake Road",
+        "desc": "Étape 4. Ancien tracé de rivière devenu ruelle sinueuse, très sympa à explorer lentement.",
+        "area": "Yanesen Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Coin caché",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hebimichi%20Snake%20Road%20Yanesen%20Tokyo"
+      },
+      {
+        "title": "Kagurazaka",
+        "desc": "Étape 5. Quartier élégant aux ruelles pavées, restaurants discrets, ambiance franco-japonaise.",
+        "area": "Kagurazaka Tokyo",
+        "budget": "¥0–¥8 000 (≈0,0€–43€)",
+        "tag": "Soirée",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kagurazaka%20Kagurazaka%20Tokyo"
+      }
+    ],
+    "food": [
+      {
+        "title": "Kayaba Coffee",
+        "desc": "Matin / pause. Café rétro dans une maison ancienne, parfait pour petit-déjeuner ou pause douce.",
+        "area": "Yanaka Tokyo",
+        "budget": "¥1 000–2 000 (≈5,4€–11€)",
+        "tag": "Café",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kayaba%20Coffee%20Yanaka%20Tokyo"
+      },
+      {
+        "title": "Niku no Suzuki",
+        "desc": "Déjeuner. Croquettes de viande à manger debout dans Yanaka Ginza.",
+        "area": "Yanaka Tokyo",
+        "budget": "¥200–600 (≈1,1€–3,2€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Niku%20no%20Suzuki%20Yanaka%20Tokyo"
+      },
+      {
+        "title": "Kagurazaka Ishikawa area",
+        "desc": "Soir / option. Zone de restaurants haut de gamme et petites adresses. Réserver si choix précis.",
+        "area": "Kagurazaka Tokyo",
+        "budget": "¥4 000–20 000 (≈22€–108€)",
+        "tag": "Dîner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kagurazaka%20Ishikawa%20area%20Kagurazaka%20Tokyo"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Allan West Gallery",
+        "desc": "Petite galerie d’art nihonga dans Yanaka, très belle si ouverte lors de votre passage.",
+        "area": "Yanaka Tokyo",
+        "budget": "¥0–¥1 000 (≈0,0€–5,4€)",
+        "tag": "Secret art",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Allan%20West%20Gallery%20Yanaka%20Tokyo"
+      }
+    ]
+  },
+  {
+    "day": 5,
+    "date": "12 juin",
+    "city": "Tokyo → Kyoto",
+    "hotel": {
+      "name": "Agora Kyoto Shijo",
+      "city": "Kyoto · Shijo",
+      "price": "226,59 € · 12–16 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Agora%20Kyoto%20Shijo"
+    },
+    "budget": "¥12 000–22 000  (≈65€–119€)/ personne hors Shinkansen",
+    "summary": "Transfert vers Kyoto. Ne pas surcharger : installation, marché Nishiki, Pontocho et première soirée dans les ruelles.",
+    "transport": "Tokyo Station → Kyoto Station en Shinkansen. Acheter billets à l’avance ou au guichet. Garder les bagages simples. Ordre conseillé sans allers-retours : Tokyo Station → Kyoto Station → Agora Kyoto Shijo → Nishiki Market → Pontocho Alley → Gion Shirakawa.",
+    "activities": [
+      {
+        "title": "Tokyo Station",
+        "desc": "Étape 1. Départ Shinkansen. Acheter ekiben avant de monter dans le train.",
+        "area": "Tokyo Station",
+        "budget": "¥",
+        "tag": "Transport",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tokyo%20Station%20Tokyo%20Station"
+      },
+      {
+        "title": "Kyoto Station",
+        "desc": "Étape 2. Arrivée à Kyoto. Architecture moderne et vue depuis les passerelles si vous avez le temps.",
+        "area": "Kyoto Station",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Arrivée",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kyoto%20Station%20Kyoto%20Station"
+      },
+      {
+        "title": "Agora Kyoto Shijo",
+        "desc": "Étape 3. Check-in à l’hôtel. Bonne base pour Gion, Nishiki et Pontocho.",
+        "area": "Kyoto Shijo",
+        "budget": "Déjà payé",
+        "tag": "Hôtel",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Agora%20Kyoto%20Shijo%20Kyoto%20Shijo"
+      },
+      {
+        "title": "Nishiki Market",
+        "desc": "Étape 4. Marché couvert : brochettes, tofu, pickles, mochi, couteaux, petites spécialités.",
+        "area": "Kyoto Nishiki Market",
+        "budget": "¥2 000–5 000 (≈11€–27€)",
+        "tag": "Food market",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nishiki%20Market%20Kyoto%20Nishiki%20Market"
+      },
+      {
+        "title": "Pontocho Alley",
+        "desc": "Étape 5. Ruelle étroite au bord de la rivière, très belle le soir avec lanternes.",
+        "area": "Kyoto Pontocho",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Photo soir",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Pontocho%20Alley%20Kyoto%20Pontocho"
+      },
+      {
+        "title": "Gion Shirakawa",
+        "desc": "Étape 6. Canal, maisons traditionnelles, très beau en soirée sans faire trop de kilomètres.",
+        "area": "Gion Kyoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Balade",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Gion%20Shirakawa%20Gion%20Kyoto"
+      }
+    ],
+    "food": [
+      {
+        "title": "Ekiben Tokyo Station",
+        "desc": "Matin / pause. Bento de gare pour le Shinkansen : expérience japonaise simple et pratique.",
+        "area": "Tokyo Station",
+        "budget": "¥1 000–2 500 (≈5,4€–14€)",
+        "tag": "Train food",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ekiben%20Tokyo%20Station%20Tokyo%20Station"
+      },
+      {
+        "title": "Nishiki Market snacks",
+        "desc": "Déjeuner. Tamago, mochi, yuba, brochettes, thé matcha. Tester plusieurs petites choses.",
+        "area": "Kyoto Nishiki Market",
+        "budget": "¥2 000–5 000 (≈11€–27€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nishiki%20Market%20snacks%20Kyoto%20Nishiki%20Market"
+      },
+      {
+        "title": "Pontocho dinner",
+        "desc": "Soir / option. Choisir selon l’ambiance : yakitori, kaiseki simple, izakaya, soba. Regarder les menus affichés.",
+        "area": "Pontocho Kyoto",
+        "budget": "¥3 000–8 000 (≈16€–43€)",
+        "tag": "Dîner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Pontocho%20dinner%20Pontocho%20Kyoto"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Kamo River à la tombée du jour",
+        "desc": "S’asseoir au bord de la rivière avec une boisson. Ambiance locale très agréable.",
+        "area": "Kamo River Kyoto",
+        "budget": "¥300–800 (≈1,6€–4,3€)",
+        "tag": "Secret chill",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kamo%20River%20%C3%A0%20la%20tomb%C3%A9e%20du%20jour%20Kamo%20River%20Kyoto"
+      }
+    ],
+    "route": {
+      "title": "Tokyo/Kanda → Kyoto · Agora Kyoto Shijo",
+      "best": "JR Kanda → Tokyo Station, puis Tokaido Shinkansen Nozomi/Hikari jusqu’à Kyoto. Ensuite métro/taxi court vers Shijo.",
+      "time": "±2h07–2h35 de Shinkansen + accès hôtel",
+      "price": "±¥14 300–14 800  (≈77€–80€)/ pers.",
+      "tip": "Acheter un ekiben à Tokyo Station. Si météo claire, tenter siège côté E pour le Mont Fuji.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tokyo%20Station%20to%20Agora%20Kyoto%20Shijo"
+    }
+  },
+  {
+    "day": 6,
+    "date": "13 juin",
+    "city": "Kyoto · Higashiyama & Gion",
+    "hotel": {
+      "name": "Agora Kyoto Shijo",
+      "city": "Kyoto · Shijo",
+      "price": "226,59 € · 12–16 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Agora%20Kyoto%20Shijo"
+    },
+    "budget": "¥10 000–18 000  (≈54€–97€)/ personne",
+    "summary": "La journée carte postale de Kyoto : Kiyomizu-dera, ruelles anciennes, temples et Gion. À commencer tôt.",
+    "transport": "Bus/taxi court depuis Shijo. Beaucoup de marche dans les pentes. Ordre conseillé sans allers-retours : Kiyomizu-dera → Sannenzaka & Ninenzaka → Yasaka Kōshin-dō → Kōdai-ji → Yasaka Shrine → Hanamikoji Street.",
+    "activities": [
+      {
+        "title": "Kiyomizu-dera",
+        "desc": "Étape 1. Temple emblématique avec vue sur Kyoto. À faire tôt pour éviter la foule.",
+        "area": "Kyoto Higashiyama",
+        "budget": "¥500 (≈2,7€)",
+        "tag": "Incontournable",
+        "intensity": "Actif",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kiyomizu-dera%20Kyoto%20Higashiyama"
+      },
+      {
+        "title": "Sannenzaka & Ninenzaka",
+        "desc": "Étape 2. Deux ruelles anciennes parfaites pour photos, souvenirs, céramiques et snacks.",
+        "area": "Kyoto Higashiyama",
+        "budget": "¥0–¥8 000 (≈0,0€–43€)",
+        "tag": "Photo",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Sannenzaka%20%26%20Ninenzaka%20Kyoto%20Higashiyama"
+      },
+      {
+        "title": "Yasaka Kōshin-dō",
+        "desc": "Étape 3. Petit temple coloré avec boules kukurizaru, très photogénique.",
+        "area": "Kyoto Higashiyama",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Spot photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Yasaka%20K%C5%8Dshin-d%C5%8D%20Kyoto%20Higashiyama"
+      },
+      {
+        "title": "Kōdai-ji",
+        "desc": "Étape 4. Beau temple avec jardins, plus calme que les grandes attractions.",
+        "area": "Kyoto Higashiyama",
+        "budget": "¥600 (≈3,2€)",
+        "tag": "Culture",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=K%C5%8Ddai-ji%20Kyoto%20Higashiyama"
+      },
+      {
+        "title": "Yasaka Shrine",
+        "desc": "Étape 5. Sanctuaire de transition avant Gion et Maruyama Park.",
+        "area": "Gion Kyoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Temple",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Yasaka%20Shrine%20Gion%20Kyoto"
+      },
+      {
+        "title": "Hanamikoji Street",
+        "desc": "Étape 6. Rue historique de Gion. Respecter les geiko/maiko : pas de photo intrusive.",
+        "area": "Gion Kyoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Soir",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hanamikoji%20Street%20Gion%20Kyoto"
+      }
+    ],
+    "food": [
+      {
+        "title": "Arabica Kyoto Higashiyama",
+        "desc": "Matin / pause. Café connu dans un cadre très Kyoto. File possible.",
+        "area": "Higashiyama Kyoto",
+        "budget": "¥500–1 200 (≈2,7€–6,5€)",
+        "tag": "Café",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Arabica%20Kyoto%20Higashiyama%20Higashiyama%20Kyoto"
+      },
+      {
+        "title": "Gion Tanto",
+        "desc": "Déjeuner. Okonomiyaki/yakisoba dans Gion, simple et convivial.",
+        "area": "Gion Kyoto",
+        "budget": "¥2 000–4 000 (≈11€–22€)",
+        "tag": "Déjeuner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Gion%20Tanto%20Gion%20Kyoto"
+      },
+      {
+        "title": "Tsujiri Gion",
+        "desc": "Soir / option. Parfait matcha, glace ou dessert au thé vert.",
+        "area": "Gion Kyoto",
+        "budget": "¥800–1 800 (≈4,3€–9,7€)",
+        "tag": "Dessert",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tsujiri%20Gion%20Gion%20Kyoto"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Ishibe-kōji Alley",
+        "desc": "Petite ruelle pavée très discrète, magnifique pour photos calmes.",
+        "area": "Kyoto Higashiyama",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ishibe-k%C5%8Dji%20Alley%20Kyoto%20Higashiyama"
+      }
+    ]
+  },
+  {
+    "day": 7,
+    "date": "14 juin",
+    "city": "Kyoto · Arashiyama & Sagano",
+    "hotel": {
+      "name": "Agora Kyoto Shijo",
+      "city": "Kyoto · Shijo",
+      "price": "226,59 € · 12–16 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Agora%20Kyoto%20Shijo"
+    },
+    "budget": "¥10 000–20 000  (≈54€–108€)/ personne",
+    "summary": "Nature, bambous, jardins et Kyoto plus lent. Commencer très tôt pour la bambouseraie.",
+    "transport": "Train vers Saga-Arashiyama. Prévoir marche et éventuellement taxi retour si fatigue. Ordre conseillé sans allers-retours : Arashiyama Bamboo Grove → Okochi Sanso Garden → Tenryu-ji → Gio-ji Temple → Adashino Nenbutsuji → Togetsukyo Bridge.",
+    "activities": [
+      {
+        "title": "Arashiyama Bamboo Grove",
+        "desc": "Étape 1. À faire tôt. Très beau mais vite bondé.",
+        "area": "Arashiyama Kyoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Incontournable",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Arashiyama%20Bamboo%20Grove%20Arashiyama%20Kyoto"
+      },
+      {
+        "title": "Okochi Sanso Garden",
+        "desc": "Étape 2. Jardin privé avec vue et thé inclus, souvent plus agréable que la bambouseraie seule.",
+        "area": "Arashiyama Kyoto",
+        "budget": "¥1 000 (≈5,4€)",
+        "tag": "Jardin",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Okochi%20Sanso%20Garden%20Arashiyama%20Kyoto"
+      },
+      {
+        "title": "Tenryu-ji",
+        "desc": "Étape 3. Grand temple zen et jardin classé, juste à côté des bambous.",
+        "area": "Arashiyama Kyoto",
+        "budget": "¥500–800 (≈2,7€–4,3€)",
+        "tag": "Temple",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tenryu-ji%20Arashiyama%20Kyoto"
+      },
+      {
+        "title": "Gio-ji Temple",
+        "desc": "Étape 4. Petit temple moussu, intime et poétique.",
+        "area": "Arashiyama Kyoto",
+        "budget": "¥300 (≈1,6€)",
+        "tag": "Secret temple",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Gio-ji%20Temple%20Arashiyama%20Kyoto"
+      },
+      {
+        "title": "Adashino Nenbutsuji",
+        "desc": "Étape 5. Plus éloigné et moins bondé, atmosphère très forte avec statues de pierre.",
+        "area": "Sagano Kyoto",
+        "budget": "¥500 (≈2,7€)",
+        "tag": "Coin caché",
+        "intensity": "Actif",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Adashino%20Nenbutsuji%20Sagano%20Kyoto"
+      },
+      {
+        "title": "Togetsukyo Bridge",
+        "desc": "Étape 6. Pont d’Arashiyama, vue rivière et montagnes.",
+        "area": "Arashiyama Kyoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Togetsukyo%20Bridge%20Arashiyama%20Kyoto"
+      }
+    ],
+    "food": [
+      {
+        "title": "Arabica Kyoto Arashiyama",
+        "desc": "Matin / pause. Café au bord de la rivière, très bon spot photo.",
+        "area": "Arashiyama Kyoto",
+        "budget": "¥500–1 200 (≈2,7€–6,5€)",
+        "tag": "Café",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Arabica%20Kyoto%20Arashiyama%20Arashiyama%20Kyoto"
+      },
+      {
+        "title": "Arashiyama Yoshimura",
+        "desc": "Déjeuner. Soba avec vue vers la rivière. Bonne option déjeuner.",
+        "area": "Arashiyama Kyoto",
+        "budget": "¥2 000–4 000 (≈11€–22€)",
+        "tag": "Soba",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Arashiyama%20Yoshimura%20Arashiyama%20Kyoto"
+      },
+      {
+        "title": "Yudofu Sagano",
+        "desc": "Soir / option. Tofu chaud de Kyoto, traditionnel et léger.",
+        "area": "Arashiyama Kyoto",
+        "budget": "¥3 000–5 000 (≈16€–27€)",
+        "tag": "Kyoto food",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Yudofu%20Sagano%20Arashiyama%20Kyoto"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Saga Toriimoto Preserved Street",
+        "desc": "Rue préservée vers Adashino : maisons anciennes, moins de touristes.",
+        "area": "Saga Toriimoto Kyoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret local",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Saga%20Toriimoto%20Preserved%20Street%20Saga%20Toriimoto%20Kyoto"
+      }
+    ]
+  },
+  {
+    "day": 8,
+    "date": "15 juin",
+    "city": "Kyoto · Fushimi, Uji option",
+    "hotel": {
+      "name": "Agora Kyoto Shijo",
+      "city": "Kyoto · Shijo",
+      "price": "226,59 € · 12–16 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Agora%20Kyoto%20Shijo"
+    },
+    "budget": "¥9 000–18 000  (≈49€–97€)/ personne",
+    "summary": "Torii rouges tôt le matin, sake à Fushimi puis option Uji pour matcha et ambiance rivière.",
+    "transport": "JR/Keihan vers Inari puis Fushimi. Uji possible en train si vous êtes motivés. Ordre conseillé sans allers-retours : Fushimi Inari Taisha → Tōfuku-ji → Fushimi Sake District → Gekkeikan Okura Sake Museum → Byōdō-in Temple → Uji River.",
+    "activities": [
+      {
+        "title": "Fushimi Inari Taisha",
+        "desc": "Étape 1. Le sanctuaire aux milliers de torii. Partir tôt, monter au moins jusqu’à Yotsutsuji.",
+        "area": "Kyoto Fushimi Inari",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Incontournable",
+        "intensity": "Actif",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Fushimi%20Inari%20Taisha%20Kyoto%20Fushimi%20Inari"
+      },
+      {
+        "title": "Tōfuku-ji",
+        "desc": "Étape 2. Grand temple zen proche de Fushimi Inari, souvent plus calme hors automne.",
+        "area": "Kyoto Tofukuji",
+        "budget": "¥600 (≈3,2€)",
+        "tag": "Temple",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=T%C5%8Dfuku-ji%20Kyoto%20Tofukuji"
+      },
+      {
+        "title": "Fushimi Sake District",
+        "desc": "Étape 3. Canaux, maisons de sake, ambiance historique plus locale.",
+        "area": "Fushimi Kyoto",
+        "budget": "¥0–¥2 000 (≈0,0€–11€)",
+        "tag": "Local",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Fushimi%20Sake%20District%20Fushimi%20Kyoto"
+      },
+      {
+        "title": "Gekkeikan Okura Sake Museum",
+        "desc": "Étape 4. Petit musée du sake avec dégustation possible.",
+        "area": "Fushimi Kyoto",
+        "budget": "¥600–¥1 000 (≈3,2€–5,4€)",
+        "tag": "Culture food",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Gekkeikan%20Okura%20Sake%20Museum%20Fushimi%20Kyoto"
+      },
+      {
+        "title": "Byōdō-in Temple",
+        "desc": "Étape 5. Option Uji : temple iconique visible sur la pièce de 10 yens.",
+        "area": "Uji Kyoto",
+        "budget": "¥600 (≈3,2€)",
+        "tag": "Option",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=By%C5%8Dd%C5%8D-in%20Temple%20Uji%20Kyoto"
+      },
+      {
+        "title": "Uji River",
+        "desc": "Étape 6. Balade calme et matcha, très bon plan si vous aimez sortir de Kyoto centre.",
+        "area": "Uji Kyoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Option chill",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Uji%20River%20Uji%20Kyoto"
+      }
+    ],
+    "food": [
+      {
+        "title": "Vermillion Cafe",
+        "desc": "Matin / pause. Pause café près de Fushimi Inari, pratique après la montée.",
+        "area": "Fushimi Inari Kyoto",
+        "budget": "¥800–1 800 (≈4,3€–9,7€)",
+        "tag": "Café",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Vermillion%20Cafe%20Fushimi%20Inari%20Kyoto"
+      },
+      {
+        "title": "Torisei Honten",
+        "desc": "Déjeuner. Yakitori et sake dans Fushimi, très bon lien avec le quartier.",
+        "area": "Fushimi Kyoto",
+        "budget": "¥2 000–4 500 (≈11€–24€)",
+        "tag": "Déjeuner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Torisei%20Honten%20Fushimi%20Kyoto"
+      },
+      {
+        "title": "Nakamura Tokichi Uji",
+        "desc": "Soir / option. Maison de thé/matcha célèbre à Uji.",
+        "area": "Uji Kyoto",
+        "budget": "¥1 000–2 500 (≈5,4€–14€)",
+        "tag": "Matcha",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nakamura%20Tokichi%20Uji%20Uji%20Kyoto"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Canal Jikkokubune",
+        "desc": "Petit canal de Fushimi, belles photos et promenade plus calme que les grands temples.",
+        "area": "Fushimi Kyoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Canal%20Jikkokubune%20Fushimi%20Kyoto"
+      }
+    ]
+  },
+  {
+    "day": 9,
+    "date": "16 juin",
+    "city": "Kyoto → Osaka",
+    "hotel": {
+      "name": "karaksa hotel grande Shin-Osaka Tower",
+      "city": "Osaka · Shin-Osaka",
+      "price": "123,88 € · 16–18 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=karaksa%20hotel%20grande%20Shin-Osaka%20Tower"
+    },
+    "budget": "¥10 000–20 000  (≈54€–108€)/ personne",
+    "summary": "Arrivée à Osaka : château, vues modernes, puis Dotonbori et street food. Osaka doit se vivre le soir.",
+    "transport": "Kyoto → Shin-Osaka en train. Check-in puis métro/JR vers Osaka Castle/Umeda/Namba. Ordre conseillé sans allers-retours : karaksa hotel grande Shin-Osaka Tower → Osaka Castle Park → Umeda Sky Building → Dotonbori → Hozenji Yokocho.",
+    "activities": [
+      {
+        "title": "karaksa hotel grande Shin-Osaka Tower",
+        "desc": "Étape 1. Check-in, dépôt des bagages. Très pratique pour les trains.",
+        "area": "Shin-Osaka",
+        "budget": "Déjà payé",
+        "tag": "Hôtel",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=karaksa%20hotel%20grande%20Shin-Osaka%20Tower%20Shin-Osaka"
+      },
+      {
+        "title": "Osaka Castle Park",
+        "desc": "Étape 2. Parc agréable, château photogénique. Monter dans le donjon seulement si vous aimez les musées.",
+        "area": "Osaka Castle",
+        "budget": "¥0–¥600 (≈0,0€–3,2€)",
+        "tag": "Classique",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Osaka%20Castle%20Park%20Osaka%20Castle"
+      },
+      {
+        "title": "Umeda Sky Building",
+        "desc": "Étape 3. Vue urbaine très forte au coucher du soleil.",
+        "area": "Umeda Osaka",
+        "budget": "¥1 500–2 000 (≈8,1€–11€)",
+        "tag": "Vue",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Umeda%20Sky%20Building%20Umeda%20Osaka"
+      },
+      {
+        "title": "Dotonbori",
+        "desc": "Étape 4. Néons, Glico Man, canal, foule et street food. À faire le soir.",
+        "area": "Dotonbori Osaka",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Incontournable",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Dotonbori%20Dotonbori%20Osaka"
+      },
+      {
+        "title": "Hozenji Yokocho",
+        "desc": "Étape 5. Petite ruelle pavée avec temple moussu, juste derrière l’agitation de Namba.",
+        "area": "Namba Osaka",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hozenji%20Yokocho%20Namba%20Osaka"
+      }
+    ],
+    "food": [
+      {
+        "title": "Takoyaki Wanaka",
+        "desc": "Matin / pause. Takoyaki classique d’Osaka, rapide et efficace.",
+        "area": "Dotonbori Osaka",
+        "budget": "¥600–1 200 (≈3,2€–6,5€)",
+        "tag": "Street food",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Takoyaki%20Wanaka%20Dotonbori%20Osaka"
+      },
+      {
+        "title": "Mizuno Okonomiyaki",
+        "desc": "Déjeuner. Okonomiyaki réputé à Dotonbori. Attente possible.",
+        "area": "Dotonbori Osaka",
+        "budget": "¥2 000–4 000 (≈11€–22€)",
+        "tag": "Dîner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Mizuno%20Okonomiyaki%20Dotonbori%20Osaka"
+      },
+      {
+        "title": "Rikuro Ojisan no Mise",
+        "desc": "Soir / option. Cheesecake japonais tremblant, bon souvenir food d’Osaka.",
+        "area": "Namba Osaka",
+        "budget": "¥1 000–1 500 (≈5,4€–8,1€)",
+        "tag": "Dessert",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Rikuro%20Ojisan%20no%20Mise%20Namba%20Osaka"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Canal côté Tombori River Walk",
+        "desc": "Pour photos de nuit, descendre au bord du canal plutôt que rester dans la foule.",
+        "area": "Dotonbori Osaka",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Canal%20c%C3%B4t%C3%A9%20Tombori%20River%20Walk%20Dotonbori%20Osaka"
+      }
+    ],
+    "route": {
+      "title": "Kyoto · Agora Kyoto Shijo → karaksa hotel grande Shin-Osaka Tower",
+      "best": "Option économique : métro/bus jusqu’à Kyoto Station puis JR Special Rapid vers Shin-Osaka. Option rapide : Shinkansen Kyoto → Shin-Osaka.",
+      "time": "Éco : ±45–60 min · Shinkansen : ±13–15 min entre gares",
+      "price": "Éco : ±¥800–1 000  (≈4,3€–5,4€)/ pers. · Shinkansen : ¥1 450  (≈7,8€)non-réservé ou ±¥3 080  (≈17€)réservé",
+      "tip": "Votre hôtel est à Shin-Osaka : le train local est généralement suffisant et beaucoup moins cher.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Agora%20Kyoto%20Shijo%20to%20karaksa%20hotel%20grande%20Shin-Osaka%20Tower"
+    }
+  },
+  {
+    "day": 10,
+    "date": "17 juin",
+    "city": "Osaka · Marchés & quartiers rétro",
+    "hotel": {
+      "name": "karaksa hotel grande Shin-Osaka Tower",
+      "city": "Osaka · Shin-Osaka",
+      "price": "123,88 € · 16–18 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=karaksa%20hotel%20grande%20Shin-Osaka%20Tower"
+    },
+    "budget": "¥9 000–18 000  (≈49€–97€)/ personne",
+    "summary": "Osaka populaire : marché, jeux, vieux quartier, kushikatsu et ruelles rétro. Journée très food. Le soir, dîner déjà réservé au Kokuryu Osaka Ebisubashi.",
+    "transport": "Métro vers Namba/Nipponbashi/Shinsekai. Beaucoup peut se faire à pied une fois sur place. Ordre conseillé sans allers-retours : Kuromon Ichiba Market → Den Den Town → Shinsekai → Tsutenkaku Tower → Namba Yasaka Shrine. Garder la fin de journée autour de Namba/Dotonbori pour rejoindre facilement Kokuryu Osaka Ebisubashi.",
+    "activities": [
+      {
+        "title": "Kuromon Ichiba Market",
+        "desc": "Étape 1. Marché food : fruits, poissons, wagyu, brochettes. Touristique mais pratique.",
+        "area": "Osaka Kuromon Market",
+        "budget": "¥2 000–6 000 (≈11€–32€)",
+        "tag": "Marché",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kuromon%20Ichiba%20Market%20Osaka%20Kuromon%20Market"
+      },
+      {
+        "title": "Den Den Town",
+        "desc": "Étape 2. Quartier jeux, manga, rétro gaming, figurines. Alternative osakaïenne à Akihabara.",
+        "area": "Nipponbashi Osaka",
+        "budget": "¥0–¥10 000 (≈0,0€–54€)",
+        "tag": "Shopping",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Den%20Den%20Town%20Nipponbashi%20Osaka"
+      },
+      {
+        "title": "Shinsekai",
+        "desc": "Étape 3. Quartier rétro autour de Tsutenkaku : enseignes géantes, kushikatsu, ambiance populaire.",
+        "area": "Shinsekai Osaka",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Rétro",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Shinsekai%20Shinsekai%20Osaka"
+      },
+      {
+        "title": "Tsutenkaku Tower",
+        "desc": "Étape 4. Tour symbolique de Shinsekai. Optionnelle, surtout pour l’ambiance autour.",
+        "area": "Shinsekai Osaka",
+        "budget": "¥1 000 (≈5,4€)",
+        "tag": "Option",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tsutenkaku%20Tower%20Shinsekai%20Osaka"
+      },
+      {
+        "title": "Namba Yasaka Shrine",
+        "desc": "Étape 5. Sanctuaire avec énorme tête de lion, très photogénique et rapide à visiter.",
+        "area": "Namba Osaka",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Spot photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Namba%20Yasaka%20Shrine%20Namba%20Osaka"
+      }
+    ],
+    "food": [
+      {
+        "title": "Kokuryu Osaka Ebisubashi",
+        "desc": "Restaurant réservé pour le soir. À placer comme dîner principal de la journée, après Shinsekai / Namba / Dotonbori selon votre rythme.",
+        "area": "Osaka Ebisubashi / Dotonbori",
+        "budget": "Réservé · budget à encoder le jour même",
+        "tag": "Dîner réservé",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kokuryu%20Osaka%20Ebisubashi%20Osaka"
+      },
+      {
+        "title": "Kushikatsu Daruma Shinsekai",
+        "desc": "Matin / pause. Brochettes frites typiques d’Osaka. Ne pas retremper dans la sauce commune.",
+        "area": "Shinsekai Osaka",
+        "budget": "¥2 000–4 000 (≈11€–22€)",
+        "tag": "Local",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kushikatsu%20Daruma%20Shinsekai%20Shinsekai%20Osaka"
+      },
+      {
+        "title": "551 Horai",
+        "desc": "Déjeuner. Butaman, brioche vapeur au porc, institution pratique à Osaka.",
+        "area": "Namba Osaka",
+        "budget": "¥500–1 500 (≈2,7€–8,1€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=551%20Horai%20Namba%20Osaka"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "JanJan Yokocho",
+        "desc": "Petite galerie populaire de Shinsekai, parfaite pour manger pas cher et voir l’Osaka rétro.",
+        "area": "Shinsekai Osaka",
+        "budget": "¥1 000–4 000 (≈5,4€–22€)",
+        "tag": "Secret food",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=JanJan%20Yokocho%20Shinsekai%20Osaka"
+      }
+    ]
+  },
+  {
+    "day": 11,
+    "date": "18 juin",
+    "city": "Osaka → Hiroshima",
+    "hotel": {
+      "name": "KOKO HOTEL Hiroshima Ekimae",
+      "city": "Hiroshima · Gare",
+      "price": "105,06 € · 18–20 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=KOKO%20HOTEL%20Hiroshima%20Ekimae"
+    },
+    "budget": "¥10 000–18 000  (≈54€–97€)/ personne hors Shinkansen",
+    "summary": "Transfert vers Hiroshima. Journée mémoire et première découverte de la ville, puis okonomiyaki local.",
+    "transport": "Shin-Osaka → Hiroshima en Shinkansen. Hôtel proche gare, pratique pour poser les bagages. Ordre conseillé sans allers-retours : KOKO HOTEL Hiroshima Ekimae → Peace Memorial Park → Hiroshima Peace Memorial Museum → Atomic Bomb Dome → Hondori Shopping Arcade.",
+    "activities": [
+      {
+        "title": "KOKO HOTEL Hiroshima Ekimae",
+        "desc": "Étape 1. Check-in ou dépôt bagages près de la gare.",
+        "area": "Hiroshima Station",
+        "budget": "Déjà payé",
+        "tag": "Hôtel",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=KOKO%20HOTEL%20Hiroshima%20Ekimae%20Hiroshima%20Station"
+      },
+      {
+        "title": "Peace Memorial Park",
+        "desc": "Étape 2. Parc du Mémorial de la Paix. Prévoir du temps et rester respectueux.",
+        "area": "Hiroshima Peace Memorial Park",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Mémoire",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Peace%20Memorial%20Park%20Hiroshima%20Peace%20Memorial%20Park"
+      },
+      {
+        "title": "Hiroshima Peace Memorial Museum",
+        "desc": "Étape 3. Musée très fort émotionnellement. À ne pas empiler avec trop d’activités lourdes.",
+        "area": "Hiroshima",
+        "budget": "¥200 (≈1,1€)",
+        "tag": "Musée",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hiroshima%20Peace%20Memorial%20Museum%20Hiroshima"
+      },
+      {
+        "title": "Atomic Bomb Dome",
+        "desc": "Étape 4. Site symbolique, à voir avant ou après le parc.",
+        "area": "Hiroshima Atomic Bomb Dome",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Mémoire",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Atomic%20Bomb%20Dome%20Hiroshima%20Atomic%20Bomb%20Dome"
+      },
+      {
+        "title": "Hondori Shopping Arcade",
+        "desc": "Étape 5. Galerie commerçante couverte, pratique en soirée ou s’il pleut.",
+        "area": "Hondori Hiroshima",
+        "budget": "¥0–¥5 000 (≈0,0€–27€)",
+        "tag": "Balade",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hondori%20Shopping%20Arcade%20Hondori%20Hiroshima"
+      }
+    ],
+    "food": [
+      {
+        "title": "Okonomimura",
+        "desc": "Matin / pause. Immeuble rempli de stands d’okonomiyaki Hiroshima-style.",
+        "area": "Hiroshima Okonomimura",
+        "budget": "¥1 500–3 000 (≈8,1€–16€)",
+        "tag": "Dîner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Okonomimura%20Hiroshima%20Okonomimura"
+      },
+      {
+        "title": "Mitchan Sohonten",
+        "desc": "Déjeuner. Okonomiyaki d’Hiroshima très connu.",
+        "area": "Hiroshima",
+        "budget": "¥1 500–3 000 (≈8,1€–16€)",
+        "tag": "Local",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Mitchan%20Sohonten%20Hiroshima"
+      },
+      {
+        "title": "Momiji manju",
+        "desc": "Soir / option. Petit gâteau fourré en forme de feuille d’érable, souvenir/snack local.",
+        "area": "Hiroshima Station",
+        "budget": "¥150–1 500 (≈0,8€–8,1€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Momiji%20manju%20Hiroshima%20Station"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Orizuru Tower rooftop",
+        "desc": "Vue sur le dôme et la ville, belle option si météo correcte.",
+        "area": "Hiroshima Orizuru Tower",
+        "budget": "¥2 200 (≈12€)",
+        "tag": "Vue",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Orizuru%20Tower%20rooftop%20Hiroshima%20Orizuru%20Tower"
+      }
+    ],
+    "route": {
+      "title": "Shin-Osaka → KOKO HOTEL Hiroshima Ekimae",
+      "best": "Sanyo Shinkansen Mizuho/Nozomi/Sakura depuis Shin-Osaka jusqu’à Hiroshima. L’hôtel est proche de la gare.",
+      "time": "±1h20–1h30",
+      "price": "±¥10 000–11 000  (≈54€–59€)/ pers.",
+      "tip": "Départ en fin de matinée ou début d’après-midi idéal pour avoir le temps de visiter Hiroshima.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Shin-Osaka%20Station%20to%20KOKO%20HOTEL%20Hiroshima%20Ekimae"
+    }
+  },
+  {
+    "day": 12,
+    "date": "19 juin",
+    "city": "Hiroshima · jardins & temples cachés",
+    "hotel": {
+      "name": "KOKO HOTEL Hiroshima Ekimae",
+      "city": "Hiroshima · Gare",
+      "price": "105,06 € · 18–20 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=KOKO%20HOTEL%20Hiroshima%20Ekimae"
+    },
+    "budget": "¥8 000–16 000  (≈43€–86€)/ personne",
+    "summary": "Une journée Hiroshima plus douce : jardin, château, temple caché dans la forêt, cafés et ruelles.",
+    "transport": "Tram + marche. Mitaki-dera demande un petit trajet mais vaut le calme. Ordre conseillé sans allers-retours : Shukkei-en Garden → Hiroshima Castle → Mitaki-dera → Hijiyama Park → Hiroshima Station ekie.",
+    "activities": [
+      {
+        "title": "Shukkei-en Garden",
+        "desc": "Étape 1. Jardin japonais compact et très agréable, parfait après une journée mémoire.",
+        "area": "Hiroshima Shukkeien Garden",
+        "budget": "¥260 (≈1,4€)",
+        "tag": "Jardin",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Shukkei-en%20Garden%20Hiroshima%20Shukkeien%20Garden"
+      },
+      {
+        "title": "Hiroshima Castle",
+        "desc": "Étape 2. Reconstruction du château, parc agréable. Option selon météo.",
+        "area": "Hiroshima Castle",
+        "budget": "¥0–¥370 (≈0,0€–2,0€)",
+        "tag": "Culture",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hiroshima%20Castle%20Hiroshima%20Castle"
+      },
+      {
+        "title": "Mitaki-dera",
+        "desc": "Étape 3. Temple caché dans une vallée boisée, lanternes, mousse, ambiance très locale.",
+        "area": "Mitaki-dera Hiroshima",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret temple",
+        "intensity": "Actif",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Mitaki-dera%20Mitaki-dera%20Hiroshima"
+      },
+      {
+        "title": "Hijiyama Park",
+        "desc": "Étape 4. Parc avec vues et musée d’art contemporain, option tranquille.",
+        "area": "Hijiyama Park Hiroshima",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Option",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hijiyama%20Park%20Hijiyama%20Park%20Hiroshima"
+      },
+      {
+        "title": "Hiroshima Station ekie",
+        "desc": "Étape 5. Bon endroit pour achats food, bentos, souvenirs avant le départ du lendemain.",
+        "area": "Hiroshima Station ekie",
+        "budget": "¥0–¥5 000 (≈0,0€–27€)",
+        "tag": "Souvenirs",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hiroshima%20Station%20ekie%20Hiroshima%20Station%20ekie"
+      }
+    ],
+    "food": [
+      {
+        "title": "Roopali Indian Restaurant",
+        "desc": "Matin / pause. Bonne option si envie de changer de cuisine après plusieurs jours japonais.",
+        "area": "Hiroshima",
+        "budget": "¥1 500–3 000 (≈8,1€–16€)",
+        "tag": "Déjeuner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Roopali%20Indian%20Restaurant%20Hiroshima"
+      },
+      {
+        "title": "Musubi Musashi",
+        "desc": "Déjeuner. Onigiri et plats simples très locaux, pratique et pas cher.",
+        "area": "Hiroshima",
+        "budget": "¥800–2 000 (≈4,3€–11€)",
+        "tag": "Local",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Musubi%20Musashi%20Hiroshima"
+      },
+      {
+        "title": "Tsukemen Bakudanya",
+        "desc": "Soir / option. Hiroshima-style spicy dipping noodles.",
+        "area": "Hiroshima",
+        "budget": "¥1 000–2 000 (≈5,4€–11€)",
+        "tag": "Noodles",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tsukemen%20Bakudanya%20Hiroshima"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Riverside cafés près de Kyobashi River",
+        "desc": "Chercher un petit café au bord de l’eau pour une pause locale sans programme rigide.",
+        "area": "Kyobashi River Hiroshima",
+        "budget": "¥700–1 500 (≈3,8€–8,1€)",
+        "tag": "Secret chill",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Riverside%20caf%C3%A9s%20pr%C3%A8s%20de%20Kyobashi%20River%20Kyobashi%20River%20Hiroshima"
+      }
+    ]
+  },
+  {
+    "day": 13,
+    "date": "20 juin",
+    "city": "Hiroshima → Miyajima",
+    "hotel": {
+      "name": "Miyajima Grand Hotel Arimoto",
+      "city": "Miyajima",
+      "price": "531,03 € · 20–21 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Miyajima%20Grand%20Hotel%20Arimoto"
+    },
+    "budget": "¥8 000–16 000  (≈43€–86€)/ personne hors ryokan",
+    "summary": "Journée île sacrée. Dormir à Miyajima est un luxe intelligent : profiter de l’île quand les visiteurs repartent.",
+    "transport": "Train/tram vers Miyajimaguchi puis ferry. Vérifier l’heure de marée pour le torii. Ordre conseillé sans allers-retours : Miyajima Grand Hotel Arimoto → Itsukushima Shrine → Daishō-in Temple → Momijidani Park → Miyajima Omotesando Shopping Street → Torii de nuit.",
+    "activities": [
+      {
+        "title": "Miyajima Grand Hotel Arimoto",
+        "desc": "Étape 1. Check-in ryokan. Hôtel haut de gamme, profiter du dîner/onsen si inclus.",
+        "area": "Miyajima",
+        "budget": "Déjà payé",
+        "tag": "Hôtel",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Miyajima%20Grand%20Hotel%20Arimoto%20Miyajima"
+      },
+      {
+        "title": "Itsukushima Shrine",
+        "desc": "Étape 2. Sanctuaire sur l’eau et torii flottant. Magique selon la marée.",
+        "area": "Miyajima",
+        "budget": "¥300 (≈1,6€)",
+        "tag": "Incontournable",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Itsukushima%20Shrine%20Miyajima"
+      },
+      {
+        "title": "Daishō-in Temple",
+        "desc": "Étape 3. Temple magnifique, escaliers, lanternes, petits détails partout. Souvent coup de cœur.",
+        "area": "Miyajima",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Temple",
+        "intensity": "Actif",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Daish%C5%8D-in%20Temple%20Miyajima"
+      },
+      {
+        "title": "Momijidani Park",
+        "desc": "Étape 4. Parc des érables, daims, accès vers le mont Misen.",
+        "area": "Miyajima",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Nature",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Momijidani%20Park%20Miyajima"
+      },
+      {
+        "title": "Miyajima Omotesando Shopping Street",
+        "desc": "Étape 5. Souvenirs, momiji manju, huîtres, spatules à riz en bois.",
+        "area": "Miyajima",
+        "budget": "¥1 000–6 000 (≈5,4€–32€)",
+        "tag": "Shopping",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Miyajima%20Omotesando%20Shopping%20Street%20Miyajima"
+      },
+      {
+        "title": "Torii de nuit",
+        "desc": "Étape 6. Après le départ des groupes, retourner voir le grand torii illuminé.",
+        "area": "Miyajima",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Photo soir",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Torii%20de%20nuit%20Miyajima"
+      }
+    ],
+    "food": [
+      {
+        "title": "Yakigaki no Hayashi",
+        "desc": "Matin / pause. Huîtres grillées et spécialités de Miyajima.",
+        "area": "Miyajima",
+        "budget": "¥2 000–4 000 (≈11€–22€)",
+        "tag": "Déjeuner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Yakigaki%20no%20Hayashi%20Miyajima"
+      },
+      {
+        "title": "Momiji Manju Iwamura",
+        "desc": "Déjeuner. Gâteau local à tester chaud ou en version frite.",
+        "area": "Miyajima",
+        "budget": "¥200–1 000 (≈1,1€–5,4€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Momiji%20Manju%20Iwamura%20Miyajima"
+      },
+      {
+        "title": "Dîner ryokan Arimoto",
+        "desc": "Soir / option. Profiter du repas de l’hôtel si inclus/réservé. C’est une partie de l’expérience.",
+        "area": "Miyajima Grand Hotel Arimoto",
+        "budget": "Inclus/variable",
+        "tag": "Ryokan",
+        "maps": "https://www.google.com/maps/search/?api=1&query=D%C3%AEner%20ryokan%20Arimoto%20Miyajima%20Grand%20Hotel%20Arimoto"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Machiya Street",
+        "desc": "Rue parallèle plus calme qu’Omotesando, maisons anciennes et ambiance d’île.",
+        "area": "Miyajima Machiya Street",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Machiya%20Street%20Miyajima%20Machiya%20Street"
+      }
+    ],
+    "route": {
+      "title": "Hiroshima → Miyajima Grand Hotel Arimoto",
+      "best": "JR Hiroshima → Miyajimaguchi, puis ferry JR vers Miyajima. Ensuite marche/navette selon bagages.",
+      "time": "Train ±30 min + ferry ±10 min + marche",
+      "price": "±¥720  (≈3,9€)/ pers. minimum : JR local ±¥420  (≈2,3€)+ ferry ¥180  (≈1,0€)+ taxe visiteur ¥100 (≈0,5€)",
+      "tip": "Vérifier les horaires de marée pour le torii. Dormir sur l’île est un très bon choix.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Hiroshima%20Station%20to%20Miyajima%20Grand%20Hotel%20Arimoto"
+    }
+  },
+  {
+    "day": 14,
+    "date": "21 juin",
+    "city": "Miyajima → Kanazawa",
+    "hotel": {
+      "name": "SOKI Kanazawa",
+      "city": "Kanazawa",
+      "price": "121,07 € · 21–23 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=SOKI%20Kanazawa"
+    },
+    "budget": "¥12 000–22 000  (≈65€–119€)/ personne hors trains",
+    "summary": "Long transfert vers Kanazawa. On garde une soirée douce : marché, quartier de geishas et bains à l’hôtel.",
+    "transport": "Ferry + train vers Hiroshima, Shinkansen/Thunderbird selon route. Journée transport longue : prévoir snacks et pauses. Ordre conseillé sans allers-retours : Lever tôt à Miyajima → SOKI Kanazawa → Omicho Market → Higashi Chaya District → Kazuemachi Chaya District.",
+    "activities": [
+      {
+        "title": "Lever tôt à Miyajima",
+        "desc": "Étape 1. Dernière balade calme avant les ferries touristiques.",
+        "area": "Miyajima",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Chill",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Lever%20t%C3%B4t%20%C3%A0%20Miyajima%20Miyajima"
+      },
+      {
+        "title": "SOKI Kanazawa",
+        "desc": "Étape 2. Check-in. Hôtel très bien placé pour marché et vieux quartiers.",
+        "area": "Kanazawa",
+        "budget": "Déjà payé",
+        "tag": "Hôtel",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=SOKI%20Kanazawa%20Kanazawa"
+      },
+      {
+        "title": "Omicho Market",
+        "desc": "Étape 3. Marché de poissons et fruits de mer. Idéal si arrivée avant fermeture.",
+        "area": "Kanazawa Omicho Market",
+        "budget": "¥1 500–5 000 (≈8,1€–27€)",
+        "tag": "Food market",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Omicho%20Market%20Kanazawa%20Omicho%20Market"
+      },
+      {
+        "title": "Higashi Chaya District",
+        "desc": "Étape 4. Ancien quartier de maisons de thé. Magnifique au soir quand c’est plus calme.",
+        "area": "Kanazawa Higashi Chaya",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Higashi%20Chaya%20District%20Kanazawa%20Higashi%20Chaya"
+      },
+      {
+        "title": "Kazuemachi Chaya District",
+        "desc": "Étape 5. Quartier plus discret au bord de rivière, très photogénique.",
+        "area": "Kanazawa Kazuemachi",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kazuemachi%20Chaya%20District%20Kanazawa%20Kazuemachi"
+      }
+    ],
+    "food": [
+      {
+        "title": "Mori Mori Sushi Omicho",
+        "desc": "Matin / pause. Sushi au tapis/commande, très bon rapport pour produits de la mer à Kanazawa.",
+        "area": "Omicho Market Kanazawa",
+        "budget": "¥2 500–5 000 (≈14€–27€)",
+        "tag": "Sushi",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Mori%20Mori%20Sushi%20Omicho%20Omicho%20Market%20Kanazawa"
+      },
+      {
+        "title": "Jibuni",
+        "desc": "Déjeuner. Plat mijoté traditionnel de Kanazawa à tester si vous voyez au menu.",
+        "area": "Kanazawa",
+        "budget": "¥1 500–3 500 (≈8,1€–19€)",
+        "tag": "Local",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Jibuni%20Kanazawa"
+      },
+      {
+        "title": "Hakuichi Higashiyama",
+        "desc": "Soir / option. Glace à la feuille d’or, cliché mais très Kanazawa.",
+        "area": "Higashi Chaya Kanazawa",
+        "budget": "¥800–1 200 (≈4,3€–6,5€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hakuichi%20Higashiyama%20Higashi%20Chaya%20Kanazawa"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Rivière Asano au crépuscule",
+        "desc": "Balade courte entre Higashi Chaya et Kazuemachi, très belle lumière.",
+        "area": "Asano River Kanazawa",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret chill",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Rivi%C3%A8re%20Asano%20au%20cr%C3%A9puscule%20Asano%20River%20Kanazawa"
+      }
+    ],
+    "route": {
+      "title": "Miyajima → Kanazawa · SOKI Kanazawa",
+      "best": "Ferry → Miyajimaguchi → Hiroshima, puis Shinkansen vers Kansai, correspondance vers Tsuruga/Kanazawa.",
+      "time": "±6h à 6h40 selon correspondances",
+      "price": "±¥19 500–20 500  (≈105€–111€)/ pers.",
+      "tip": "Le trajet le plus lourd du voyage. Partir tôt, réserver les sièges, garder snacks/eau.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Miyajima%20to%20SOKI%20Kanazawa"
+    }
+  },
+  {
+    "day": 15,
+    "date": "22 juin",
+    "city": "Kanazawa · jardins, samouraïs, artisanat",
+    "hotel": {
+      "name": "SOKI Kanazawa",
+      "city": "Kanazawa",
+      "price": "121,07 € · 21–23 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=SOKI%20Kanazawa"
+    },
+    "budget": "¥10 000–18 000  (≈54€–97€)/ personne",
+    "summary": "Kanazawa est raffinée : jardin, château, samouraïs, or, céramique, ruelles. Très bon jour souvenirs qualitatifs.",
+    "transport": "Bus circulaire ou marche. Les distances sont raisonnables mais la journée est dense. Ordre conseillé sans allers-retours : Kenroku-en Garden → Kanazawa Castle Park → Gyokusen-inmaru Garden → 21st Century Museum of Contemporary Art → Nagamachi Samurai District → Nomura-ke Samurai Residence.",
+    "activities": [
+      {
+        "title": "Kenroku-en Garden",
+        "desc": "Étape 1. Un des jardins les plus célèbres du Japon. Commencer le matin.",
+        "area": "Kanazawa Kenrokuen",
+        "budget": "¥320 (≈1,7€)",
+        "tag": "Incontournable",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kenroku-en%20Garden%20Kanazawa%20Kenrokuen"
+      },
+      {
+        "title": "Kanazawa Castle Park",
+        "desc": "Étape 2. Grand parc et portes du château, juste à côté de Kenroku-en.",
+        "area": "Kanazawa Castle",
+        "budget": "¥0–¥320 (≈0,0€–1,7€)",
+        "tag": "Culture",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kanazawa%20Castle%20Park%20Kanazawa%20Castle"
+      },
+      {
+        "title": "Gyokusen-inmaru Garden",
+        "desc": "Étape 3. Petit jardin restauré au pied du château, souvent plus calme.",
+        "area": "Kanazawa Castle Park",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret jardin",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Gyokusen-inmaru%20Garden%20Kanazawa%20Castle%20Park"
+      },
+      {
+        "title": "21st Century Museum of Contemporary Art",
+        "desc": "Étape 4. Musée contemporain, architecture et installations. Réserver selon expo.",
+        "area": "Kanazawa 21st Century Museum",
+        "budget": "¥0–¥1 500 (≈0,0€–8,1€)",
+        "tag": "Art",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=21st%20Century%20Museum%20of%20Contemporary%20Art%20Kanazawa%2021st%20Century%20Museum"
+      },
+      {
+        "title": "Nagamachi Samurai District",
+        "desc": "Étape 5. Ruelles de samouraïs, murs en terre, canaux. Très différent de Kyoto.",
+        "area": "Kanazawa Nagamachi",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Histoire",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nagamachi%20Samurai%20District%20Kanazawa%20Nagamachi"
+      },
+      {
+        "title": "Nomura-ke Samurai Residence",
+        "desc": "Étape 6. Maison de samouraï avec petit jardin intérieur magnifique.",
+        "area": "Kanazawa Nagamachi",
+        "budget": "¥550 (≈3,0€)",
+        "tag": "Maison",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nomura-ke%20Samurai%20Residence%20Kanazawa%20Nagamachi"
+      }
+    ],
+    "food": [
+      {
+        "title": "Fuwari",
+        "desc": "Matin / pause. Izakaya moderne réputé, bonne option dîner à réserver si possible.",
+        "area": "Kanazawa",
+        "budget": "¥4 000–7 000 (≈22€–38€)",
+        "tag": "Dîner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Fuwari%20Kanazawa"
+      },
+      {
+        "title": "Turban Curry",
+        "desc": "Déjeuner. Curry de Kanazawa, rapide et local.",
+        "area": "Kanazawa",
+        "budget": "¥900–1 500 (≈4,9€–8,1€)",
+        "tag": "Déjeuner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Turban%20Curry%20Kanazawa"
+      },
+      {
+        "title": "Morihachi",
+        "desc": "Soir / option. Wagashi traditionnel, parfait pour souvenir sucré élégant.",
+        "area": "Kanazawa",
+        "budget": "¥500–2 000 (≈2,7€–11€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Morihachi%20Kanazawa"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Boutiques de feuille d’or",
+        "desc": "Kanazawa est la capitale de la feuille d’or : chercher petits objets, cosmétiques ou douceurs.",
+        "area": "Kanazawa gold leaf shop",
+        "budget": "¥1 000–8 000 (≈5,4€–43€)",
+        "tag": "Souvenir typique",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Boutiques%20de%20feuille%20d%E2%80%99or%20Kanazawa%20gold%20leaf%20shop"
+      }
+    ]
+  },
+  {
+    "day": 16,
+    "date": "23 juin",
+    "city": "Kanazawa → Hakone",
+    "hotel": {
+      "name": "Hakone Onsen Ryokan Yaeikan",
+      "city": "Hakone · Yumoto",
+      "price": "316,16 € · 23–24 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Hakone%20Onsen%20Ryokan%20Yaeikan"
+    },
+    "budget": "¥12 000–25 000  (≈65€–135€)/ personne hors trains",
+    "summary": "Transition vers l’expérience ryokan/onsen. L’objectif : arriver pas trop tard et profiter de Hakone plutôt que courir.",
+    "transport": "Kanazawa → Tokyo/Odawara → Hakone-Yumoto selon trains. Garder les bagages simples ou envoyer vers Tokyo si possible. Ordre conseillé sans allers-retours : Hakone Onsen Ryokan Yaeikan → Hakone-Yumoto Onsen Street → Ajisai Bridge → Tenzan Onsen.",
+    "activities": [
+      {
+        "title": "Hakone Onsen Ryokan Yaeikan",
+        "desc": "Étape 1. Check-in ryokan, bain onsen, yukata, dîner si inclus. C’est le cœur de la journée.",
+        "area": "Hakone Yumoto",
+        "budget": "Déjà payé",
+        "tag": "Ryokan",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hakone%20Onsen%20Ryokan%20Yaeikan%20Hakone%20Yumoto"
+      },
+      {
+        "title": "Hakone-Yumoto Onsen Street",
+        "desc": "Étape 2. Petite rue commerçante près de la gare : souvenirs, snacks, manju vapeur.",
+        "area": "Hakone Yumoto",
+        "budget": "¥1 000–5 000 (≈5,4€–27€)",
+        "tag": "Balade",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hakone-Yumoto%20Onsen%20Street%20Hakone%20Yumoto"
+      },
+      {
+        "title": "Ajisai Bridge",
+        "desc": "Étape 3. Petit pont près de Hakone-Yumoto, joli en juin avec hortensias si saison favorable.",
+        "area": "Hakone Yumoto",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ajisai%20Bridge%20Hakone%20Yumoto"
+      },
+      {
+        "title": "Tenzan Onsen",
+        "desc": "Étape 4. Option bain public si vous voulez une autre expérience onsen.",
+        "area": "Hakone Yumoto",
+        "budget": "¥1 300–2 000 (≈7,0€–11€)",
+        "tag": "Onsen",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tenzan%20Onsen%20Hakone%20Yumoto"
+      }
+    ],
+    "food": [
+      {
+        "title": "Yumochi Honpo Chimoto",
+        "desc": "Matin / pause. Pâtisserie de Hakone connue pour yumochi, parfait souvenir/snack.",
+        "area": "Hakone Yumoto",
+        "budget": "¥300–1 500 (≈1,6€–8,1€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Yumochi%20Honpo%20Chimoto%20Hakone%20Yumoto"
+      },
+      {
+        "title": "Hatsuhana Soba Honten",
+        "desc": "Déjeuner. Soba très connu à Hakone-Yumoto.",
+        "area": "Hakone Yumoto",
+        "budget": "¥1 500–3 000 (≈8,1€–16€)",
+        "tag": "Déjeuner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hatsuhana%20Soba%20Honten%20Hakone%20Yumoto"
+      },
+      {
+        "title": "Dîner ryokan Yaeikan",
+        "desc": "Soir / option. Priorité au dîner du ryokan si réservé : c’est souvent plus marquant qu’un restaurant extérieur.",
+        "area": "Hakone Yaeikan",
+        "budget": "Inclus/variable",
+        "tag": "Ryokan",
+        "maps": "https://www.google.com/maps/search/?api=1&query=D%C3%AEner%20ryokan%20Yaeikan%20Hakone%20Yaeikan"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Envoyer les gros bagages vers Tokyo",
+        "desc": "Si possible, utiliser takkyubin depuis Kanazawa vers l’hôtel de Tokyo pour profiter de Hakone léger.",
+        "area": "Kanazawa to Tokyo luggage delivery",
+        "budget": "¥2 000–3 500 (≈11€–19€)",
+        "tag": "Astuce logistique",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Envoyer%20les%20gros%20bagages%20vers%20Tokyo%20Kanazawa%20to%20Tokyo%20luggage%20delivery"
+      }
+    ],
+    "route": {
+      "title": "Kanazawa → Hakone Onsen Ryokan Yaeikan",
+      "best": "Kanazawa → Tokyo en Hokuriku Shinkansen, puis Tokyo → Odawara en Tokaido Shinkansen, puis Hakone Tozan Line vers Hakone-Yumoto.",
+      "time": "±4h30–5h",
+      "price": "±¥18 000–19 000  (≈97€–103€)/ pers.",
+      "tip": "Envoyer les grosses valises vers Tokyo par takkyubin et garder un petit sac pour Hakone.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=SOKI%20Kanazawa%20to%20Hakone%20Onsen%20Ryokan%20Yaeikan"
+    }
+  },
+  {
+    "day": 17,
+    "date": "24 juin",
+    "city": "Hakone → Tokyo · Asakusa",
+    "hotel": {
+      "name": "HOTEL AMANEK Asakusa Sakurabashi",
+      "city": "Tokyo · Asakusa/Sumida",
+      "price": "235,42 € · 24–28 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=HOTEL%20AMANEK%20Asakusa%20Sakurabashi"
+    },
+    "budget": "¥10 000–20 000  (≈54€–108€)/ personne hors trains",
+    "summary": "Matin Hakone si météo favorable, puis retour à Tokyo côté Asakusa/Sumida pour une soirée lumineuse.",
+    "transport": "Hakone-Yumoto → Odawara → Tokyo. Si ciel clair, viser lac Ashi/Hakone Shrine avant de partir. Ordre conseillé sans allers-retours : Hakone Shrine → Lake Ashi → HOTEL AMANEK Asakusa Sakurabashi → Sumida River Walk → Tokyo Skytree night view.",
+    "activities": [
+      {
+        "title": "Hakone Shrine",
+        "desc": "Étape 1. Sanctuaire au bord du lac avec torii dans l’eau. À faire tôt si météo correcte.",
+        "area": "Lake Ashi Hakone",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Photo",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hakone%20Shrine%20Lake%20Ashi%20Hakone"
+      },
+      {
+        "title": "Lake Ashi",
+        "desc": "Étape 2. Vue possible sur Fuji selon météo. Croisière optionnelle si vous avez le temps.",
+        "area": "Hakone Lake Ashi",
+        "budget": "¥0–¥1 500 (≈0,0€–8,1€)",
+        "tag": "Nature",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Lake%20Ashi%20Hakone%20Lake%20Ashi"
+      },
+      {
+        "title": "HOTEL AMANEK Asakusa Sakurabashi",
+        "desc": "Étape 3. Check-in pour les 4 dernières nuits Tokyo.",
+        "area": "Asakusa Tokyo",
+        "budget": "Déjà payé",
+        "tag": "Hôtel",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=HOTEL%20AMANEK%20Asakusa%20Sakurabashi%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Sumida River Walk",
+        "desc": "Étape 4. Balade du soir vers Skytree, très agréable depuis Asakusa.",
+        "area": "Sumida River Walk Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Balade",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Sumida%20River%20Walk%20Sumida%20River%20Walk%20Tokyo"
+      },
+      {
+        "title": "Tokyo Skytree night view",
+        "desc": "Étape 5. Option montée ou simple vue depuis le bas/Solamachi.",
+        "area": "Tokyo Skytree",
+        "budget": "¥0–¥3 500 (≈0,0€–19€)",
+        "tag": "Vue",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tokyo%20Skytree%20night%20view%20Tokyo%20Skytree"
+      }
+    ],
+    "food": [
+      {
+        "title": "Hakone manju vapeur",
+        "desc": "Snack chaud à Hakone-Yumoto avant le départ.",
+        "area": "Hakone Yumoto",
+        "budget": "¥200–800 (≈1,1€–4,3€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hakone%20manju%20vapeur%20Hakone%20Yumoto"
+      },
+      {
+        "title": "Asakusa Imahan",
+        "desc": "Déjeuner. Sukiyaki haut de gamme à Asakusa. Réserver si vous voulez une belle soirée.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥8 000–20 000 (≈43€–108€)",
+        "tag": "Dîner premium",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Asakusa%20Imahan%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Tokyo Solamachi food floor",
+        "desc": "Option facile avec beaucoup de choix près de Skytree.",
+        "area": "Tokyo Skytree Solamachi",
+        "budget": "¥1 500–4 000 (≈8,1€–22€)",
+        "tag": "Dîner facile",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tokyo%20Solamachi%20food%20floor%20Tokyo%20Skytree%20Solamachi"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Komagata Bridge photo spot",
+        "desc": "Vue très sympa sur Skytree et Asahi Beer Hall sans être collé à la foule.",
+        "area": "Komagata Bridge Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Komagata%20Bridge%20photo%20spot%20Komagata%20Bridge%20Tokyo"
+      }
+    ],
+    "route": {
+      "title": "Hakone → HOTEL AMANEK Asakusa Sakurabashi",
+      "best": "Hakone-Yumoto → Odawara, puis Shinkansen vers Tokyo/Ueno + métro, ou Odakyu vers Shinjuku + métro.",
+      "time": "±1h45–2h30",
+      "price": "Éco : ±¥1 500–2 500  (≈8,1€–14€)/ pers. · rapide Shinkansen : ±¥4 000–5 000  (≈22€–27€)/ pers.",
+      "tip": "Si vous profitez du matin à Hakone, ne visez pas une arrivée trop tôt à Tokyo.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Hakone-Yumoto%20Station%20to%20HOTEL%20AMANEK%20Asakusa%20Sakurabashi"
+    }
+  },
+  {
+    "day": 18,
+    "date": "25 juin",
+    "city": "Tokyo · Tsukiji, Ginza, TeamLab option",
+    "hotel": {
+      "name": "HOTEL AMANEK Asakusa Sakurabashi",
+      "city": "Tokyo · Asakusa/Sumida",
+      "price": "235,42 € · 24–28 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=HOTEL%20AMANEK%20Asakusa%20Sakurabashi"
+    },
+    "budget": "¥12 000–25 000  (≈65€–135€)/ personne",
+    "summary": "Tokyo food et moderne : marché, jardin, Ginza, puis art numérique ou Toyosu/Odaiba.",
+    "transport": "Métro Asakusa → Tsukiji/Ginza. TeamLab/Toyosu demande réservation et trajet. Ordre conseillé sans allers-retours : Tsukiji Outer Market → Hamarikyu Gardens → Ginza Six & Itoya → TeamLab Planets Tokyo → Toyosu Senkyaku Banrai.",
+    "activities": [
+      {
+        "title": "Tsukiji Outer Market",
+        "desc": "Étape 1. Petit-déjeuner food : omelette, thon, brochettes, fraises, mochi. Arriver le matin.",
+        "area": "Tsukiji Tokyo",
+        "budget": "¥2 000–6 000 (≈11€–32€)",
+        "tag": "Food",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tsukiji%20Outer%20Market%20Tsukiji%20Tokyo"
+      },
+      {
+        "title": "Hamarikyu Gardens",
+        "desc": "Étape 2. Jardin entre gratte-ciel et eau, pause élégante après Tsukiji.",
+        "area": "Tokyo Hamarikyu Gardens",
+        "budget": "¥300 (≈1,6€)",
+        "tag": "Jardin",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Hamarikyu%20Gardens%20Tokyo%20Hamarikyu%20Gardens"
+      },
+      {
+        "title": "Ginza Six & Itoya",
+        "desc": "Étape 3. Shopping élégant, papeterie japonaise, rooftop gratuit à Ginza Six.",
+        "area": "Ginza Tokyo",
+        "budget": "¥0–¥15 000 (≈0,0€–81€)",
+        "tag": "Shopping",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ginza%20Six%20%26%20Itoya%20Ginza%20Tokyo"
+      },
+      {
+        "title": "TeamLab Planets Tokyo",
+        "desc": "Étape 4. Option art numérique immersive. Réserver à l’avance si vous voulez le faire.",
+        "area": "Toyosu Tokyo",
+        "budget": "¥3 800–4 500 (≈21€–24€)",
+        "tag": "Réservation",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=TeamLab%20Planets%20Tokyo%20Toyosu%20Tokyo"
+      },
+      {
+        "title": "Toyosu Senkyaku Banrai",
+        "desc": "Étape 5. Zone food/onsen récente près de Toyosu, bon plan si TeamLab.",
+        "area": "Toyosu Tokyo",
+        "budget": "¥2 000–6 000 (≈11€–32€)",
+        "tag": "Food option",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Toyosu%20Senkyaku%20Banrai%20Toyosu%20Tokyo"
+      }
+    ],
+    "food": [
+      {
+        "title": "Tsukiji Itadori Bekkan",
+        "desc": "Matin / pause. Sushi/kaisendon à Tsukiji, pratique pour produits de la mer.",
+        "area": "Tsukiji Tokyo",
+        "budget": "¥2 500–6 000 (≈14€–32€)",
+        "tag": "Déjeuner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Tsukiji%20Itadori%20Bekkan%20Tsukiji%20Tokyo"
+      },
+      {
+        "title": "Ginza Kagari",
+        "desc": "Déjeuner. Ramen crémeux au poulet à Ginza, connu et raffiné.",
+        "area": "Ginza Tokyo",
+        "budget": "¥1 500–2 500 (≈8,1€–14€)",
+        "tag": "Ramen",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ginza%20Kagari%20Ginza%20Tokyo"
+      },
+      {
+        "title": "Turret Coffee",
+        "desc": "Soir / option. Café fort et local près de Tsukiji.",
+        "area": "Tsukiji Tokyo",
+        "budget": "¥500–1 200 (≈2,7€–6,5€)",
+        "tag": "Café",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Turret%20Coffee%20Tsukiji%20Tokyo"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Rooftop Ginza Six",
+        "desc": "Vue gratuite et calme au-dessus de Ginza. Bon spot pause/photo.",
+        "area": "Ginza Six Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret vue",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Rooftop%20Ginza%20Six%20Ginza%20Six%20Tokyo"
+      }
+    ]
+  },
+  {
+    "day": 19,
+    "date": "26 juin",
+    "city": "Tokyo · Shibuya, Harajuku, Daikanyama",
+    "hotel": {
+      "name": "HOTEL AMANEK Asakusa Sakurabashi",
+      "city": "Tokyo · Asakusa/Sumida",
+      "price": "235,42 € · 24–28 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=HOTEL%20AMANEK%20Asakusa%20Sakurabashi"
+    },
+    "budget": "¥10 000–22 000  (≈54€–119€)/ personne",
+    "summary": "Tokyo mode, jeunes quartiers, sanctuaire, cafés stylés et ruelles plus design. Bonne journée photos et shopping.",
+    "transport": "Asakusa → Shibuya/Harajuku. Finir à Nakameguro/Daikanyama pour plus calme. Ordre conseillé sans allers-retours : Shibuya Crossing → Shibuya Sky → Meiji Jingu → Takeshita Street → Cat Street → Daikanyama T-Site.",
+    "activities": [
+      {
+        "title": "Shibuya Crossing",
+        "desc": "Étape 1. Classique mais à faire. Meilleure vue depuis un café/étage si possible.",
+        "area": "Shibuya Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Incontournable",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Shibuya%20Crossing%20Shibuya%20Tokyo"
+      },
+      {
+        "title": "Shibuya Sky",
+        "desc": "Étape 2. Vue spectaculaire. Réserver créneau coucher de soleil si possible.",
+        "area": "Shibuya Tokyo",
+        "budget": "¥2 200–2 800 (≈12€–15€)",
+        "tag": "Vue",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Shibuya%20Sky%20Shibuya%20Tokyo"
+      },
+      {
+        "title": "Meiji Jingu",
+        "desc": "Étape 3. Grand sanctuaire dans la forêt, contraste parfait avec Harajuku.",
+        "area": "Harajuku Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Sanctuaire",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Meiji%20Jingu%20Harajuku%20Tokyo"
+      },
+      {
+        "title": "Takeshita Street",
+        "desc": "Étape 4. Rue jeune/pop, crêpes, snacks, boutiques. À faire mais ne pas y rester trop longtemps.",
+        "area": "Harajuku Tokyo",
+        "budget": "¥0–¥5 000 (≈0,0€–27€)",
+        "tag": "Pop",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Takeshita%20Street%20Harajuku%20Tokyo"
+      },
+      {
+        "title": "Cat Street",
+        "desc": "Étape 5. Boutiques mode plus agréables entre Harajuku et Shibuya.",
+        "area": "Tokyo Cat Street",
+        "budget": "¥0–¥10 000 (≈0,0€–54€)",
+        "tag": "Shopping",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Cat%20Street%20Tokyo%20Cat%20Street"
+      },
+      {
+        "title": "Daikanyama T-Site",
+        "desc": "Étape 6. Librairie/design/café, Tokyo chic et calme.",
+        "area": "Daikanyama Tokyo",
+        "budget": "¥0–¥5 000 (≈0,0€–27€)",
+        "tag": "Design",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Daikanyama%20T-Site%20Daikanyama%20Tokyo"
+      },
+      {
+        "title": "Nakameguro River",
+        "desc": "Étape 7. Balade le long de la rivière, cafés et petites boutiques.",
+        "area": "Nakameguro Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret chill",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nakameguro%20River%20Nakameguro%20Tokyo"
+      }
+    ],
+    "food": [
+      {
+        "title": "Harajuku Marion Crepes",
+        "desc": "Matin / pause. Crêpe japonaise à manger dans la rue.",
+        "area": "Harajuku Tokyo",
+        "budget": "¥600–1 000 (≈3,2€–5,4€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Harajuku%20Marion%20Crepes%20Harajuku%20Tokyo"
+      },
+      {
+        "title": "Uobei Shibuya Dogenzaka",
+        "desc": "Déjeuner. Sushi fun sur rail, pas luxe mais très efficace.",
+        "area": "Shibuya Tokyo",
+        "budget": "¥1 500–3 000 (≈8,1€–16€)",
+        "tag": "Sushi casual",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Uobei%20Shibuya%20Dogenzaka%20Shibuya%20Tokyo"
+      },
+      {
+        "title": "Afuri Harajuku",
+        "desc": "Soir / option. Ramen yuzu shio, plus léger que beaucoup de ramen.",
+        "area": "Harajuku Tokyo",
+        "budget": "¥1 300–2 200 (≈7,0€–12€)",
+        "tag": "Ramen",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Afuri%20Harajuku%20Harajuku%20Tokyo"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Onibus Coffee Nakameguro",
+        "desc": "Petit café apprécié, spot très agréable pour souffler après Shibuya.",
+        "area": "Nakameguro Tokyo",
+        "budget": "¥600–1 200 (≈3,2€–6,5€)",
+        "tag": "Secret café",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Onibus%20Coffee%20Nakameguro%20Nakameguro%20Tokyo"
+      }
+    ]
+  },
+  {
+    "day": 20,
+    "date": "27 juin",
+    "city": "Tokyo · Kichijoji, Shimokitazawa, sushi premium option",
+    "hotel": {
+      "name": "HOTEL AMANEK Asakusa Sakurabashi",
+      "city": "Tokyo · Asakusa/Sumida",
+      "price": "235,42 € · 24–28 juin",
+      "maps": "https://www.google.com/maps/search/?api=1&query=HOTEL%20AMANEK%20Asakusa%20Sakurabashi"
+    },
+    "budget": "¥12 000–35 000  (≈65€–189€)/ personne selon dîner",
+    "summary": "Dernière vraie journée complète : quartiers créatifs, achats, souvenirs, et option dîner premium pour marquer la fin du voyage.",
+    "transport": "Trajets un peu plus longs vers l’ouest de Tokyo. Garder la soirée flexible. Ordre conseillé sans allers-retours : Kichijoji Sunroad → Inokashira Park → Harmonica Yokocho → Shimokitazawa → Nakano Broadway.",
+    "activities": [
+      {
+        "title": "Kichijoji Sunroad",
+        "desc": "Étape 1. Galerie commerçante locale, snacks, boutiques sans ambiance trop touristique.",
+        "area": "Kichijoji Tokyo",
+        "budget": "¥0–¥8 000 (≈0,0€–43€)",
+        "tag": "Local",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Kichijoji%20Sunroad%20Kichijoji%20Tokyo"
+      },
+      {
+        "title": "Inokashira Park",
+        "desc": "Étape 2. Parc très apprécié des Tokyoïtes, lac et ambiance calme.",
+        "area": "Kichijoji Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Chill",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Inokashira%20Park%20Kichijoji%20Tokyo"
+      },
+      {
+        "title": "Harmonica Yokocho",
+        "desc": "Étape 3. Mini-ruelles de bars/restos près de Kichijoji, très photogénique.",
+        "area": "Kichijoji Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Secret photo",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Harmonica%20Yokocho%20Kichijoji%20Tokyo"
+      },
+      {
+        "title": "Shimokitazawa",
+        "desc": "Étape 4. Friperies, cafés, vinyles, petites boutiques. Très bon pour souvenirs différents.",
+        "area": "Shimokitazawa Tokyo",
+        "budget": "¥0–¥15 000 (≈0,0€–81€)",
+        "tag": "Shopping local",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Shimokitazawa%20Shimokitazawa%20Tokyo"
+      },
+      {
+        "title": "Nakano Broadway",
+        "desc": "Étape 5. Alternative geek/vintage à Akihabara : montres, figurines, jeux, objets rares.",
+        "area": "Nakano Tokyo",
+        "budget": "¥0–¥20 000 (≈0,0€–108€)",
+        "tag": "Shopping",
+        "intensity": "Modéré",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Nakano%20Broadway%20Nakano%20Tokyo"
+      }
+    ],
+    "food": [
+      {
+        "title": "Satou Kichijoji",
+        "desc": "Matin / pause. Menchi-katsu très connu, snack de rue à manger chaud.",
+        "area": "Kichijoji Tokyo",
+        "budget": "¥300–700 (≈1,6€–3,8€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Satou%20Kichijoji%20Kichijoji%20Tokyo"
+      },
+      {
+        "title": "Shirube Shimokitazawa",
+        "desc": "Déjeuner. Izakaya vivant, bon pour une soirée locale.",
+        "area": "Shimokitazawa Tokyo",
+        "budget": "¥3 000–6 000 (≈16€–32€)",
+        "tag": "Dîner",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Shirube%20Shimokitazawa%20Shimokitazawa%20Tokyo"
+      },
+      {
+        "title": "Sushi Masuda",
+        "desc": "Option sushi haut de gamme pour une soirée spéciale. Réservation indispensable.",
+        "area": "Tokyo",
+        "budget": "¥30 000–60 000+ (≈162€–324€+)",
+        "tag": "Premium",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Sushi%20Masuda%20Tokyo"
+      },
+      {
+        "title": "GINZA SUSHI ARAI",
+        "desc": "Soir / option. Très haut de gamme, difficile à réserver. Option anniversaire/fin de voyage.",
+        "area": "Ginza Tokyo",
+        "budget": "¥40 000–70 000+ (≈216€–378€+)",
+        "tag": "Premium",
+        "maps": "https://www.google.com/maps/search/?api=1&query=GINZA%20SUSHI%20ARAI%20Ginza%20Tokyo"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Village Vanguard Shimokitazawa",
+        "desc": "Boutique bazar pop japonaise : cadeaux drôles, objets absurdes, souvenirs moins classiques.",
+        "area": "Shimokitazawa Tokyo",
+        "budget": "¥1 000–5 000 (≈5,4€–27€)",
+        "tag": "Souvenir secret",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Village%20Vanguard%20Shimokitazawa%20Shimokitazawa%20Tokyo"
+      }
+    ]
+  },
+  {
+    "day": 21,
+    "date": "28 juin",
+    "city": "Tokyo → retour",
+    "hotel": {
+      "name": "Retour Belgique",
+      "city": "Aéroport Tokyo",
+      "price": "Fin du voyage",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tokyo%20Haneda%20Airport%20Narita%20Airport"
+    },
+    "budget": "¥3 000–10 000  (≈16€–54€)/ personne",
+    "summary": "Dernier jour : check-out, derniers achats, rejoindre l’aéroport sans stress.",
+    "transport": "Prévoir large pour l’aéroport. Vérifier si départ Haneda ou Narita, et choisir train direct/limousine bus selon bagages. Ordre conseillé sans allers-retours : Check-out HOTEL AMANEK Asakusa Sakurabashi → Asakusa morning walk → Don Quijote Asakusa → Aéroport Tokyo.",
+    "activities": [
+      {
+        "title": "Check-out HOTEL AMANEK Asakusa Sakurabashi",
+        "desc": "Étape 1. Vérifier passeports, chargeurs, achats, tax-free, billets et terminal de départ.",
+        "area": "Asakusa Tokyo",
+        "budget": "€0",
+        "tag": "Départ",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Check-out%20HOTEL%20AMANEK%20Asakusa%20Sakurabashi%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Asakusa morning walk",
+        "desc": "Étape 2. Dernière balade tranquille si l’horaire du vol le permet.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥0 (≈0,0€)",
+        "tag": "Dernier tour",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Asakusa%20morning%20walk%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Don Quijote Asakusa",
+        "desc": "Étape 3. Derniers souvenirs : KitKat, cosmétiques, snacks, gadgets. Attention au poids bagage.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥2 000–15 000 (≈11€–81€)",
+        "tag": "Souvenirs",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Don%20Quijote%20Asakusa%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Aéroport Tokyo",
+        "desc": "Étape 4. Arriver en avance, repas, achats tax-free, retour.",
+        "area": "Tokyo Airport",
+        "budget": "¥",
+        "tag": "Transport",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=A%C3%A9roport%20Tokyo%20Tokyo%20Airport"
+      }
+    ],
+    "food": [
+      {
+        "title": "Pelican Café Asakusa",
+        "desc": "Matin / pause. Toast japonais simple et apprécié, si vous avez le temps le matin.",
+        "area": "Asakusa Tokyo",
+        "budget": "¥1 000–2 000 (≈5,4€–11€)",
+        "tag": "Petit-déj",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Pelican%20Caf%C3%A9%20Asakusa%20Asakusa%20Tokyo"
+      },
+      {
+        "title": "Onigiri / bento de gare",
+        "desc": "Option pratique pour trajet aéroport.",
+        "area": "Asakusa Tokyo Station",
+        "budget": "¥500–1 500 (≈2,7€–8,1€)",
+        "tag": "Snack",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Onigiri%20/%20bento%20de%20gare%20Asakusa%20Tokyo%20Station"
+      },
+      {
+        "title": "Ramen ou sushi à l’aéroport",
+        "desc": "Soir / option. Dernier repas japonais avant le vol, selon terminal.",
+        "area": "Tokyo Airport",
+        "budget": "¥1 500–3 500 (≈8,1€–19€)",
+        "tag": "Aéroport",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ramen%20ou%20sushi%20%C3%A0%20l%E2%80%99a%C3%A9roport%20Tokyo%20Airport"
+      }
+    ],
+    "secrets": [
+      {
+        "title": "Garder ¥1 000–2 000  (≈5,4€–11€)en cash",
+        "desc": "Pour casier, boisson, train ou petit imprévu le dernier jour.",
+        "area": "Tokyo",
+        "budget": "¥1 000–2 000 (≈5,4€–11€)",
+        "tag": "Astuce",
+        "intensity": "Chill",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Garder%20%C2%A51%20000%E2%80%932%20000%20en%20cash%20Tokyo"
+      }
+    ],
+    "route": {
+      "title": "HOTEL AMANEK Asakusa Sakurabashi → aéroport",
+      "best": "Si Haneda : Asakusa Line/Keikyu direct ou quasi direct. Si Narita : Keisei Access/Skyliner depuis Ueno selon bagages.",
+      "time": "Haneda : ±45–60 min · Narita : ±60–85 min",
+      "price": "Haneda : ±¥700–900  (≈3,8€–4,9€)/ pers. · Narita : ±¥1 400–2 800  (≈7,6€–15€)/ pers.",
+      "tip": "Prévoir large, surtout avec grosses valises.",
+      "maps": "https://www.google.com/maps/search/?api=1&query=HOTEL%20AMANEK%20Asakusa%20Sakurabashi%20to%20Haneda%20Airport%20Narita%20Airport"
+    }
+  }
+];
+let current = Number(localStorage.getItem("japan-current-day") || 1);
+let query = "";
+
+function key(day, type, idx) { return `jp-2026-${day}-${type}-${idx}`; }
+function isDone(day, type, idx) { return localStorage.getItem(key(day,type,idx)) === "1"; }
+function toggle(day, type, idx) {
+  const k = key(day,type,idx);
+  localStorage.setItem(k, localStorage.getItem(k)==="1" ? "0" : "1");
+  renderDay(day);
+  updateStats();
+}
+function doneCount() {
+  let total=0, done=0;
+  TRIP.forEach(d => ["activities","food","secrets"].forEach(t => d[t].forEach((_,i)=>{total++; if(isDone(d.day,t,i)) done++;})));
+  return {total, done};
+}
+function link(url,label="Maps") { return `<a class="map" target="_blank" rel="noopener" href="${url}">📍 ${label}</a>`; }
+
+function renderItem(obj, day, type, idx) {
+  const done = isDone(day,type,idx);
+  return `<div class="item ${done?'done':''}">
+    <div class="check" onclick="toggle(${day},'${type}',${idx})">✓</div>
+    <div>
+      <div class="ititle">${obj.title}</div>
+      <div class="idesc">${obj.desc}</div>
+      <div class="tags">
+        <span class="tag">${obj.tag || type}</span>
+        <span class="tag">${obj.area || ''}</span>
+        <span class="tag">${obj.budget || ''}</span>
+        ${obj.intensity ? `<span class="tag">${obj.intensity}</span>` : ""}
+      </div>
+      ${link(obj.maps)}
+    </div>
+  </div>`;
+}
+function renderDay(n) {
+  current = Math.max(1, Math.min(TRIP.length, n));
+  localStorage.setItem("japan-current-day", current);
+  document.querySelectorAll(".pill").forEach(p => p.classList.toggle("active", Number(p.dataset.day)===current));
+  document.querySelectorAll(".dayCard").forEach(c => c.classList.toggle("active", Number(c.dataset.day)===current));
+  refreshBudget(current);
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function routeBox(d) {
+  if(!d.route) return "";
+  return `<section class="section" style="grid-column:1/-1">
+    <h3>🚅 Grand trajet du jour</h3>
+    <div class="routeBox">
+      <div class="hotelName">${d.route.title}</div>
+      <div class="routeLine"><b>Meilleur plan</b><span>${d.route.best}</span></div>
+      <div class="routeLine"><b>Durée</b><span>${d.route.time}</span></div>
+      <div class="routeLine"><b>Prix</b><span class="routePrice">${d.route.price}</span></div>
+      <div class="routeLine"><b>Conseil</b><span>${d.route.tip}</span></div>
+      ${link(d.route.maps, "Voir le trajet")}
+    </div>
+  </section>`;
+}
+
+
+function budgetKey(day) { return `jp-2026-budget-${day}`; }
+function saveBudget(day) {
+  const input = document.getElementById(`budget-input-${day}`);
+  if(!input) return;
+  const val = input.value.trim().replace(",", ".");
+  if(val === "") {
+    localStorage.removeItem(budgetKey(day));
+  } else {
+    localStorage.setItem(budgetKey(day), val);
+  }
+  refreshBudget(day);
+  updateStats();
+}
+function getBudget(day) {
+  return localStorage.getItem(budgetKey(day)) || "";
+}
+function refreshBudget(day) {
+  const saved = getBudget(day);
+  const box = document.getElementById(`budget-saved-${day}`);
+  if(box) {
+    box.innerHTML = saved
+      ? `Total enregistré : ${Number(saved).toLocaleString("fr-BE", {maximumFractionDigits:2})} € <small>Ce montant reste sauvegardé sur ce téléphone/navigateur.</small>`
+      : `Aucun montant enregistré <small>Entre le total réel de votre journée, par exemple 357 ou 522.</small>`;
+  }
+}
+function budgetBox(d) {
+  const saved = getBudget(d.day);
+  return `<section class="section" style="grid-column:1/-1">
+    <h3>💶 Budget réel du jour</h3>
+    <div class="budgetInputWrap">
+      <div class="meta">Inscris ici ce que cette journée vous a réellement coûté. Tu peux inclure manuellement le prix de l’hôtel du jour si tu veux que le total général reprenne tout.</div>
+      <div class="budgetFields">
+        <input id="budget-input-${d.day}" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Exemple : 357" value="${saved}" onkeydown="if(event.key==='Enter') saveBudget(${d.day})">
+        <button onclick="saveBudget(${d.day})">Enregistrer</button>
+      </div>
+      <div class="budgetSaved" id="budget-saved-${d.day}">
+        ${saved ? `Total enregistré : ${Number(saved).toLocaleString("fr-BE", {maximumFractionDigits:2})} € <small>Ce montant reste sauvegardé sur ce téléphone/navigateur.</small>` : `Aucun montant enregistré <small>Entre le total réel de votre journée, par exemple 357 ou 522.</small>`}
+      </div>
+    </div>
+  </section>`;
+}
+function budgetTotal() {
+  return TRIP.reduce((sum,d) => {
+    const v = parseFloat(getBudget(d.day));
+    return sum + (isNaN(v) ? 0 : v);
+  }, 0);
+}
+
+function dayCard(d) {
+  return `<article class="dayCard" data-day="${d.day}">
+    <div class="dayHead">
+      <div class="dayTitle">
+        <div>
+          <h2>Jour ${d.day} · ${d.date}</h2>
+          <div class="city">${d.city}</div>
+        </div>
+        <div class="tag">${d.budget}</div>
+      </div>
+      <p class="summary">${d.summary}</p>
+    </div>
+    <div class="grid">
+      <section class="section">
+        <h3>🏨 Hôtel du soir</h3>
+        <div class="hotelBox">
+          <div class="hotelName">${d.hotel.name}</div>
+          <div class="meta">${d.hotel.city}<br>${d.hotel.price}</div>
+          ${link(d.hotel.maps, "Ouvrir l'hôtel")}
+        </div>
+      </section>
+      <section class="section">
+        <h3>🚆 Transport / logique du jour</h3>
+        <div class="meta">${d.transport}</div>
+      </section>
+      ${routeBox(d)}
+      <section class="section">
+        <h3>🎯 Activités</h3>
+        <div class="list">${d.activities.map((x,i)=>renderItem(x,d.day,"activities",i)).join("")}</div>
+      </section>
+      <section class="section">
+        <h3>🍜 Restaurants & snacks</h3>
+        <div class="list">${d.food.map((x,i)=>renderItem(x,d.day,"food",i)).join("")}</div>
+      </section>
+      <section class="section" style="grid-column:1/-1">
+        <h3>💎 Bonus secrets / regard local</h3>
+        <div class="list">${d.secrets.map((x,i)=>renderItem(x,d.day,"secrets",i)).join("")}</div>
+      </section>
+      ${budgetBox(d)}
+    </div>
+    <div class="transport"><div class="note">💡 Conseil : les liens Maps ouvrent Google Maps. L’app fonctionne hors ligne une fois chargée, mais Maps nécessite Internet.</div></div>
+  </article>`;
+}
+function updateStats() {
+  const c = doneCount();
+  const el = document.getElementById("progressStat");
+  if(el) el.innerHTML = `<b>${c.done}/${c.total}</b><span>éléments cochés</span>`;
+  const bt = document.getElementById("budgetTotalStat");
+  if(bt) bt.innerHTML = `<b>${budgetTotal().toLocaleString("fr-BE", {maximumFractionDigits:2})} €</b><span>budget réel + hôtels</span>`;
+}
+function build() {
+  const app = document.getElementById("app");
+  app.innerHTML = `
+  <header class="hero">
+    <div class="heroTop">
+      <div>
+        <div class="kicker">🇯🇵 Carnet interactif offline</div>
+        <h1>Japon · 8 → 28 juin</h1>
+        <div class="subtitle">Itinéraire jour par jour avec hôtels déjà payés, activités, restaurants, coins cachés, spots photo, budget et liens Google Maps.</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>21</b><span>jours</span></div>
+      <div class="stat"><b>8</b><span>hôtels / étapes</span></div>
+      <div class="stat"><b>±¥70k–90k<br><small>≈378–486 €</small></b><span>transports / pers.</span></div>
+      <div class="stat" id="budgetTotalStat"><b>0 €</b><span>budget réel + hôtels</span></div>
+      <div class="stat" id="progressStat"><b>0/0</b><span>éléments cochés</span></div>
+    </div>
+    <div class="searchbar"><input id="search" placeholder="Rechercher : sushi, temple, Tokyo, snack..." oninput="filterDays(this.value)"></div>
+    <nav class="pillrow">${TRIP.map(d=>`<button class="pill" data-day="${d.day}" onclick="renderDay(${d.day})">J${d.day} · ${d.date}</button>`).join("")}</nav>
+  </header>
+  <section class="overview">
+    <div class="mini"><b>🧭 Logique du voyage</b><small>Tokyo léger à l’arrivée, Kyoto culturel, Osaka food, Hiroshima/Miyajima émotion + ryokan, Kanazawa raffiné, Hakone onsen, retour Tokyo shopping et derniers souvenirs.</small></div>
+    <div class="mini"><b>🎒 Astuce bagages</b><small>Le jour Kanazawa → Hakone, envisager le takkyubin vers Tokyo pour ne garder qu’un petit sac au ryokan.</small></div>
+    <div class="mini"><b>🚅 Budget transport</b><small>Estimation grands trajets : ±¥70 000 par personne, soit environ 378 €, hors petits métros quotidiens. Avec métros/bus urbains et aéroports, prévoir plutôt ±¥85 000–95 000 par personne, soit environ 459–513 €.</small></div>
+    <div class="mini"><b>🎫 JR Pass ?</b><small>Le 14 jours Ordinary est à ¥80 000, soit environ 432 €. Il peut être limite/rentable selon vos trajets exacts, mais les billets simples gardent plus de flexibilité.</small></div>
+  </section>
+  <main id="days">${TRIP.map(dayCard).join("")}</main>`;
+  renderDay(current);
+  updateStats();
+}
+function filterDays(val) {
+  query = val.trim().toLowerCase();
+  if(!query) return;
+  const found = TRIP.find(d => JSON.stringify(d).toLowerCase().includes(query));
+  if(found) renderDay(found.day);
+}
+function nextDay() { renderDay(current+1); }
+function prevDay() { renderDay(current-1); }
+function resetProgress() {
+  if(!confirm("Tout décocher ?")) return;
+  Object.keys(localStorage).filter(k=>k.startsWith("jp-2026-")).forEach(k=>localStorage.removeItem(k));
+  build();
+}
+build();
+</script>
+</body>
+</html>
