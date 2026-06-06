@@ -2983,6 +2983,25 @@ function doneCount() {
   TRIP.forEach(d => ["activities","food","secrets"].forEach(t => d[t].forEach((_,i)=>{total++; if(isDone(d.day,t,i)) done++;})));
   return {total, done};
 }
+
+function normalizeText(s) {
+  return String(s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+function matchesSearch(obj) {
+  if(!query) return true;
+  return normalizeText(JSON.stringify(obj)).includes(normalizeText(query));
+}
+function filteredList(items) {
+  if(!query) return items;
+  return items.filter(matchesSearch);
+}
+function emptySearchMsg(label) {
+  return `<div class="note">Aucun résultat dans ${label} pour « ${query} ».</div>`;
+}
+
 function link(url,label="Maps") { return `<a class="map" target="_blank" rel="noopener" href="${url}">📍 ${label}</a>`; }
 
 function renderItem(obj, day, type, idx) {
@@ -3103,15 +3122,15 @@ function dayCard(d) {
       ${routeBox(d)}
       <section class="section">
         <h3>🎯 Activités</h3>
-        <div class="list">${d.activities.map((x,i)=>renderItem(x,d.day,"activities",i)).join("")}</div>
+        <div class="list">${filteredList(d.activities).length ? filteredList(d.activities).map((x)=>renderItem(x,d.day,"activities",d.activities.indexOf(x))).join("") : emptySearchMsg("les activités")}</div>
       </section>
       <section class="section">
         <h3>🍜 Restaurants & snacks</h3>
-        <div class="list">${d.food.map((x,i)=>renderItem(x,d.day,"food",i)).join("")}</div>
+        <div class="list">${filteredList(d.food).length ? filteredList(d.food).map((x)=>renderItem(x,d.day,"food",d.food.indexOf(x))).join("") : emptySearchMsg("les restaurants & snacks")}</div>
       </section>
       <section class="section" style="grid-column:1/-1">
         <h3>💎 3 bonus secrets / surprises</h3>
-        <div class="list">${d.secrets.map((x,i)=>renderItem(x,d.day,"secrets",i)).join("")}</div>
+        <div class="list">${filteredList(d.secrets).length ? filteredList(d.secrets).map((x)=>renderItem(x,d.day,"secrets",d.secrets.indexOf(x))).join("") : emptySearchMsg("les bonus")}</div>
       </section>
       ${budgetBox(d)}
     </div>
@@ -3143,7 +3162,7 @@ function build() {
       <div class="stat" id="budgetTotalStat"><b>0 €</b><span>budget réel + hôtels</span></div>
       <div class="stat" id="progressStat"><b>0/0</b><span>éléments cochés</span></div>
     </div>
-    <div class="searchbar"><input id="search" placeholder="Rechercher : sushi, temple, Tokyo, snack..." oninput="filterDays(this.value)"></div>
+    <div class="searchbar"><input id="search" placeholder="Rechercher dans les jours : sushi, temple, Shibuya, hôtel..." oninput="filterDays(this.value)"></div>
     <nav class="pillrow">${TRIP.map(d=>`<button class="pill" data-day="${d.day}" onclick="renderDay(${d.day})">J${d.day} · ${d.date}</button>`).join("")}</nav>
   </header>
   <section class="overview">
@@ -3152,15 +3171,43 @@ function build() {
     <div class="mini"><b>🚅 Budget transport</b><small>Estimation grands trajets : ±¥70 000 par personne, soit environ 378 €, hors petits métros quotidiens. Avec métros/bus urbains et aéroports, prévoir plutôt ±¥85 000–95 000 par personne, soit environ 459–513 €.</small></div>
     <div class="mini"><b>🎫 JR Pass ?</b><small>Le 14 jours Ordinary est à ¥80 000, soit environ 432 €. Il peut être limite/rentable selon vos trajets exacts, mais les billets simples gardent plus de flexibilité.</small></div>
   </section>
+  <div id="searchHint" class="mini" style="display:none"><b>🔎 Recherche active</b><small>Les listes affichent uniquement les éléments qui correspondent au mot recherché. Vide la barre pour tout revoir.</small></div>
   <main id="days">${TRIP.map(dayCard).join("")}</main>`;
   renderDay(current);
   updateStats();
 }
 function filterDays(val) {
-  query = val.trim().toLowerCase();
-  if(!query) return;
-  const found = TRIP.find(d => JSON.stringify(d).toLowerCase().includes(query));
-  if(found) renderDay(found.day);
+  query = val.trim();
+
+  // Si recherche vide : on reconstruit l'app complète et on reste sur le jour actuel.
+  if(!query) {
+    build();
+    renderDay(current, false);
+    return;
+  }
+
+  // Si le jour actuel contient le terme, on reste dessus.
+  const currentDay = TRIP.find(d => d.day === current);
+  const currentHasResult = currentDay && normalizeText(JSON.stringify(currentDay)).includes(normalizeText(query));
+
+  // Sinon on saute vers le premier jour correspondant.
+  if(!currentHasResult) {
+    const found = TRIP.find(d => normalizeText(JSON.stringify(d)).includes(normalizeText(query)));
+    if(found) current = found.day;
+  }
+
+  build();
+  renderDay(current, false);
+
+  // Conserver le texte dans le champ après reconstruction.
+  const hint = document.getElementById("searchHint");
+  if(hint) hint.style.display = query ? "block" : "none";
+
+  const input = document.getElementById("search");
+  if(input) {
+    input.value = query;
+    input.focus();
+  }
 }
 function nextDay() { renderDay(current+1); }
 function prevDay() { renderDay(current-1); }
